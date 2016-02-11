@@ -1,19 +1,27 @@
 require 'spec_helper'
 
-describe TradeIt::User::Login do
-  let(:username) { "dummy" }
+describe TradeIt::User::Verify do
+  let(:username) { "dummySecurity" }
   let(:password) { "pass" }
   let(:broker) { :dummy }
-
-  subject do
+  let(:answer) { 'tradingticket' }
+  let!(:user) do
     TradeIt::User::Login.new(
       username: username,
       password: password,
       broker: broker
+    ).call.response.payload
+  end
+  let(:token) { user[:token] }
+
+  subject do
+    TradeIt::User::Verify.new(
+      token: token,
+      answer: answer
     ).call.response
   end
 
-  describe 'good credentials' do
+  describe 'good answer' do
     it 'returns token' do
       expect(subject.status).to eql 200
       expect(subject.payload[:type]).to eql 'success'
@@ -22,26 +30,20 @@ describe TradeIt::User::Login do
   end
 
 
-  describe 'bad credentials' do
-    let(:username) { 'foooooobaaarrrr' }
+  describe 'bad token' do
+    let(:token) { 'foooooobaaarrrr' }
     it 'throws error' do
       expect{subject}.to raise_error(TradeIt::Errors::LoginException)
     end
   end
 
   describe 'user needing security question' do
-    let(:username) { 'dummySecurity' }
+    let(:answer) { 'foooooobaaarrrr' }
     it 'returns response with questions' do
       expect(subject.payload[:type]).to eql 'verify'
       expect(subject.payload[:challenge]).to eql 'question'
       expect(subject.payload[:data]).to have_key :answers
     end
 
-    describe 'image' do
-      let(:username) { 'dummySecurityImage' }
-      it 'returns image in response' do
-        expect(subject.payload[:data]).to have_key :encoded
-      end
-    end
   end
 end

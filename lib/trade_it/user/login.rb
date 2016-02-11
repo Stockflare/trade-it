@@ -20,58 +20,10 @@ module TradeIt
         }
 
         result = HTTParty.post(uri.to_s, body: body, format: :json)
-        if result['status'] == 'SUCCESS'
-          #
-          # User logged in without any security questions
-          #
-          self.response = Response.new({
-            raw: result,
-            status: 200,
-            payload: {
-              type: 'success',
-              token: result["token"],
-              accounts: result['accounts']
-            },
-            messages: [result['shortMessage']]
-          })
-        elsif result['status'] == 'INFORMATION_NEEDED'
-          #
-          # User Asked for security question
-          #
-          if result['challengeImage']
-            data = {
-              encoded: result['challengeImage']
-            }
-          else
-            data = {
-              question: result['securityQuestion'],
-              answers: result['securityQuestionOptions']
-            }
-          end
-          self.response = Response.new({
-            raw: result,
-            status: 200,
-            payload: {
-              type: 'verify',
-              challenge: result['challengeImage'] ? 'image' : 'question',
-              token: result["token"],
-              data: data
-            },
-            messages: [result['shortMessage']]
-          })
-        else
-          #
-          # Login failed
-          #
-          raise TradeIt::Errors::LoginException.new(
-            type: :error,
-            code: 500,
-            description: result['shortMessage'],
-            messages: result['longMessages']
-          )
-        end
+
+        self.response = TradeIt::User.parse_result(result)
+
         TradeIt.logger.info self.response.to_h
-        pp(response.to_h)
         return self
       end
 

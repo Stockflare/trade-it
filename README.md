@@ -101,21 +101,27 @@ Successful response requesting security question
 
 Successful response requesting image style security question
 
+The `encoded` image is Base64 encoded
+
 ```
-{ raw:   { 'challengeImage' => 'Base 64 Encoded Image',
+{ raw:   { 'challengeImage' =>
+    'iVBORw0KGgoAAAANSUhEUgAAAc4AA....',
            'errorFields' => nil,
            'informationLongMessage' => nil,
-           'informationShortMessage' => 'Send',
+           'informationShortMessage' => nil,
            'informationType' => 'SECURITY_QUESTION',
            'longMessages' => nil,
+           'securityQuestion' =>
+    'Two card index numbers are shown in the image below. Please enter them without spaces to proceed.',
+           'securityQuestionOptions' => [],
            'shortMessage' => nil,
            'status' => 'INFORMATION_NEEDED',
-           'token' => 'e106022c16d64534873cd1dcffa65d20' },
+           'token' => '99db99b421df419c9d02907dff146e2c' },
   status: 200,
   payload:   { type: 'verify',
                challenge: 'image',
-               token: 'e106022c16d64534873cd1dcffa65d20',
-               data: { encoded: 'Base 64 Encoded Image' } },
+               token: '99db99b421df419c9d02907dff146e2c',
+               data:     { encoded:       'iVBORw0KGgoAAAANSUhEUgAAAc4AAAA....' } },
   messages: [nil] }
 ```
 
@@ -126,4 +132,54 @@ Login failure will raise a `TradeIt::Errors::LoginException` with the following 
   code: 500,
   description: 'Could Not Login',
   messages: ['Check your username and password and try again.'] }
+```
+
+### TradeIt::User::Verify
+
+Example Call
+
+```
+TradeIt::User::Verify.new(
+  token: <token from TradeIt::User::Login>,
+  answer: answer
+).call.response
+```
+
+All success responses are identical to `TradeIt::User::Login`
+
+If the user provides a bad answer then the response will be a success asking another question.
+
+A failure will raise a `TradeIt::Errors::LoginException` with the similar attributes:
+```
+{ type: :error,
+  code: 500,
+  description: 'Could Not Complete Your Request',
+  messages: ['Your session has expired. Please try again'] }
+```
+
+### TradeIt::User::Logout
+
+Example call:
+```
+TradeIt::User::Logout.new(
+  token: <token from previous login>
+).call.response
+```
+
+Successful logout response
+
+```
+{ raw: { 'longMessages' => nil, 'shortMessage' => nil, 'status' => 'SUCCESS', 'token' => '765b7e4056334a27a9b65033b889878e' },
+  status: 200,
+  payload: { type: 'success', token: '765b7e4056334a27a9b65033b889878e', accounts: nil },
+  messages: [nil] }
+```
+
+Failed Logout will raise a `TradeIt::Errors::LogoutException` with similar attributes:
+
+```
+{ type: :error,
+  code: 500,
+  description: 'Could Not Complete Your Request',
+  messages: ['Your session has expired. Please try again'] }
 ```
