@@ -6,6 +6,7 @@ module TradeIt
     autoload :Login, 'trade_it/user/login'
     autoload :Verify, 'trade_it/user/verify'
     autoload :Logout, 'trade_it/user/logout'
+    autoload :Refresh, 'trade_it/user/refresh'
 
     class << self
 
@@ -25,7 +26,7 @@ module TradeIt
               token: result["token"],
               accounts: result['accounts']
             },
-            messages: [result['shortMessage']]
+            messages: [result['shortMessage']].compact
           })
         elsif result['status'] == 'INFORMATION_NEEDED'
           #
@@ -50,7 +51,7 @@ module TradeIt
               token: result["token"],
               data: data
             },
-            messages: [result['shortMessage']]
+            messages: [result['shortMessage']].compact
           })
         else
           #

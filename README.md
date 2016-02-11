@@ -96,7 +96,7 @@ Successful response requesting security question
                challenge: 'question',
                token: '7994ee5d86bc4a168d450f268a7cd17b',
                data: { question: "What is your mother's maiden name", answers: [] } },
-  messages: [nil] }
+  messages: [] }
 ```
 
 Successful response requesting image style security question
@@ -122,7 +122,7 @@ The `encoded` image is Base64 encoded
                challenge: 'image',
                token: '99db99b421df419c9d02907dff146e2c',
                data:     { encoded:       'iVBORw0KGgoAAAANSUhEUgAAAc4AAAA....' } },
-  messages: [nil] }
+  messages: [] }
 ```
 
 Login failure will raise a `TradeIt::Errors::LoginException` with the following attributes:
@@ -172,7 +172,42 @@ Successful logout response
 { raw: { 'longMessages' => nil, 'shortMessage' => nil, 'status' => 'SUCCESS', 'token' => '765b7e4056334a27a9b65033b889878e' },
   status: 200,
   payload: { type: 'success', token: '765b7e4056334a27a9b65033b889878e', accounts: nil },
-  messages: [nil] }
+  messages: [] }
+```
+
+Failed Logout will raise a `TradeIt::Errors::LogoutException` with similar attributes:
+
+```
+{ type: :error,
+  code: 500,
+  description: 'Could Not Complete Your Request',
+  messages: ['Your session has expired. Please try again'] }
+```
+
+### TradeIt::User::Refresh
+
+Used to stop a users token from expiring, does not send you a new token
+
+Example Call:
+
+```
+TradeIt::User::Refresh.new(
+  token: token
+).call.response
+```
+
+Successful Response:
+
+```
+{ raw:   { 'longMessages' => nil,
+           'shortMessage' => nil,
+           'status' => 'SUCCESS',
+           'token' => 'ed34e745c7714be6936370cb1026f33e' },
+  status: 200,
+  payload:   { type: 'success',
+               token: 'ed34e745c7714be6936370cb1026f33e',
+               accounts: nil },
+  messages: [] }
 ```
 
 Failed Logout will raise a `TradeIt::Errors::LogoutException` with similar attributes:
