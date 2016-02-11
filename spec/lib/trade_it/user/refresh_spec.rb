@@ -5,7 +5,7 @@ describe TradeIt::User::Refresh do
   let(:password) { "pass" }
   let(:broker) { :dummy }
   let!(:user) do
-    TradeIt::User::Login.new(
+    TradeIt::User::LinkAndLogin.new(
       username: username,
       password: password,
       broker: broker

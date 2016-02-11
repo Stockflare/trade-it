@@ -3,7 +3,9 @@
 #
 module TradeIt
   module User
+    autoload :Link, 'trade_it/user/link'
     autoload :Login, 'trade_it/user/login'
+    autoload :LinkAndLogin, 'trade_it/user/link_and_login'
     autoload :Verify, 'trade_it/user/verify'
     autoload :Logout, 'trade_it/user/logout'
     autoload :Refresh, 'trade_it/user/refresh'

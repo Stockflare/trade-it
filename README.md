@@ -47,15 +47,55 @@ We current support the following broker symbols
 }
 ```
 
+### TradeIt::User::Link
+
+Get a Users oAuth token
+
+Example Call:
+
+```
+TradeIt::User::Link.new(
+  username: username,
+  password: password,
+  broker: broker
+).call.response
+```
+
+Successful response:
+
+```
+{ raw:   { 'longMessages' => nil,
+           'shortMessage' => 'User succesfully linked',
+           'status' => 'SUCCESS',
+           'token' => '86f1546f42a44f17a60d59937b261397',
+           'userId' => '0bf145522335273053ca',
+           'userToken' =>
+    '6j6rx91SaeuYsHHwxcW%2BsUGn5ZN%2FvfTsmWGLGnr4oPI%3DFahzxUqAhkLGhOyR%2FpxgKw%3D%3D' },
+  status: 200,
+  payload:   { type: 'success',
+               user_id: '0bf145522335273053ca',
+               user_token:     '6j6rx91SaeuYsHHwxcW%2BsUGn5ZN%2FvfTsmWGLGnr4oPI%3DFahzxUqAhkLGhOyR%2FpxgKw%3D%3D' },
+  messages: ['User succesfully linked'] }
+```
+
+Link failure will raise a `TradeIt::Errors::LoginException` with the following attributes:
+
+```
+{ type: :error,
+  code: 500,
+  description: 'Could Not Login',
+  messages: ['Check your username and password and try again.'] }
+```
+
+
 ### TradeIt::User::Login
 
 example call:
 
 ```
 TradeIt::User::Login.new(
-  username: username,
-  password: password,
-  broker: broker
+  user_id: user_id,
+  user_token: user_token
 ).call.response
 ```
 

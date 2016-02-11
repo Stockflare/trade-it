@@ -6,7 +6,7 @@ describe TradeIt::User::Verify do
   let(:broker) { :dummy }
   let(:answer) { 'tradingticket' }
   let!(:user) do
-    TradeIt::User::Login.new(
+    TradeIt::User::LinkAndLogin.new(
       username: username,
       password: password,
       broker: broker

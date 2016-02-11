@@ -4,12 +4,20 @@ describe TradeIt::User::Login do
   let(:username) { "dummy" }
   let(:password) { "pass" }
   let(:broker) { :dummy }
-
-  subject do
-    TradeIt::User::Login.new(
+  let!(:link) do
+    TradeIt::User::Link.new(
       username: username,
       password: password,
       broker: broker
+    ).call.response
+  end
+  let(:user_id) { link.payload[:user_id] }
+  let(:user_token) {link.payload[:user_token]}
+
+  subject do
+    TradeIt::User::Login.new(
+      user_id: user_id,
+      user_token: user_token
     ).call.response
   end
 
@@ -23,7 +31,7 @@ describe TradeIt::User::Login do
 
 
   describe 'bad credentials' do
-    let(:username) { 'foooooobaaarrrr' }
+    let(:user_id) { 'foooooobaaarrrr' }
     it 'throws error' do
       expect{subject}.to raise_error(TradeIt::Errors::LoginException)
     end
