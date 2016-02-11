@@ -4,6 +4,7 @@ Coveralls.wear!
 require 'trade_it'
 require 'faker'
 require 'factory_girl'
+require 'pry'
 require 'pry-byebug'
 
 Dir[Pathname(__FILE__).dirname.join('shared/*.rb').to_s].each { |f| require f }

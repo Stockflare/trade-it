@@ -16,6 +16,7 @@ module TradeIt
       end
 
       def log
+        pp(self.to_h)
         TradeIt.logger.error self.to_h
       end
     end

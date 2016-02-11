@@ -70,6 +70,8 @@ module TradeIt
             messages: result['longMessages']
           )
         end
+        TradeIt.logger.info self.response.to_h
+        pp(response.to_h)
         return self
       end
 
