@@ -18,13 +18,22 @@ module TradeIt
           #
           # User logged in without any security questions
           #
+          accounts = []
+          if result['accounts']
+            accounts = result['accounts'].map do |a|
+              TradeIt::Base::Account.new(
+                account_number: a['accountNumber'],
+                name: a['name']
+              ).to_h
+            end
+          end
           response = TradeIt::Base::Response.new({
             raw: result,
             status: 200,
             payload: {
               type: 'success',
               token: result["token"],
-              accounts: result['accounts']
+              accounts: accounts
             },
             messages: [result['shortMessage']].compact
           })
@@ -65,6 +74,7 @@ module TradeIt
           )
         end
 
+        # pp(response.to_h)
         return response
       end
     end

@@ -9,6 +9,7 @@ module TradeIt
   autoload :Base, 'trade_it/base'
   autoload :User, 'trade_it/user'
   autoload :Errors, 'trade_it/errors'
+  autoload :Positions, 'trade_it/positions'
 
   class << self
     attr_writer :logger

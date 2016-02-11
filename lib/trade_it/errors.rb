@@ -26,5 +26,11 @@ module TradeIt
 
     class ConfigException < TradeItException
     end
+
+    class ConfigException < TradeItException
+    end
+
+    class PositionException < TradeItException
+    end
   end
 end

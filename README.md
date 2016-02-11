@@ -63,7 +63,7 @@ Successful response without security question:
 
 ```
 { raw:   { 'accounts' =>
-    [{ 'accountNumber' => 'brkAcct1',
+    [{ 'account_number' => 'brkAcct1',
        'name' => 'Individual Account (XX878977484)' }],
            'longMessages' => nil,
            'shortMessage' => 'Credential Successfully Validated',
@@ -72,7 +72,7 @@ Successful response without security question:
   status: 200,
   payload:   { type: 'success',
                token: 'ce15f0eb7a9a473eb40687cdf3150479',
-               accounts:     [{ 'accountNumber' => 'brkAcct1',
+               accounts:     [{ 'account_number' => 'brkAcct1',
                                 'name' => 'Individual Account (XX878977484)' }] },
   messages: ['Credential Successfully Validated'] }
 ```
@@ -217,4 +217,56 @@ Failed Logout will raise a `TradeIt::Errors::LogoutException` with similar attri
   code: 500,
   description: 'Could Not Complete Your Request',
   messages: ['Your session has expired. Please try again'] }
+```
+
+### TradeIt::Position::Get
+
+Example Call
+
+```
+TradeIt::Positions::Get.new(
+  token: token,
+  account_number: account_number
+).call.response
+```
+
+Successful response:
+
+```
+{ raw:   { 'currentPage' => 0,
+           'longMessages' => nil,
+           'positions' =>
+    [{ 'costbasis' => 103.34,
+       'holdingType' => 'LONG',
+       'lastPrice' => 112.34,
+       'quantity' => 1.0,
+       'symbol' => 'AAPL',
+       'symbolClass' => 'EQUITY_OR_ETF',
+       'todayGainLossDollar' => 3.0,
+       'todayGainLossPercentage' => 0.34,
+       'totalGainLossDollar' => 9.0,
+       'totalGainLossPercentage' => 1.2 },
+      ...
+     ],
+           'shortMessage' => 'Position successfully fetched',
+           'status' => 'SUCCESS',
+           'token' => 'd3e72226aad646cea9e2d6177bd50953',
+           'totalPages' => 1 },
+  status: 200,
+  payload:   { positions:     [{ quantity: 1, price: 103.34, ticker: 'AAPL', instrument_class: 'equity_or_etf', change: 9.0, holding: 'long' },
+                               { quantity: -1, price: 103.34, ticker: 'IBM', instrument_class: 'equity_or_etf', change: 9.0, holding: 'short' },
+                               { quantity: 1, price: 103.34, ticker: 'GE', instrument_class: 'equity_or_etf', change: 9.0, holding: 'short' },
+                               { quantity: 1, price: 103.34, ticker: 'MSFT', instrument_class: 'equity_or_etf', change: 9.0, holding: 'long' }],
+               pages: 1,
+               page: 0 },
+  messages: ['Position successfully fetched'] }
+```
+
+Failed Call will raise a `TradeIt::Errors::PositionException` with similar attributes:
+
+```
+{ type: :error,
+  code: 500,
+  description: 'Could Not Fetch Your Positions',
+  messages:   ['The account foooooobaaarrrr is not valid or not active anymore.'] }
 ```
