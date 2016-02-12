@@ -28,6 +28,7 @@ describe TradeIt::Positions::Get do
       expect(subject.payload.pages).to be > 0
       expect(subject.payload.positions[0].quantity).to_not eql 0
       expect(subject.payload.positions[0].price).to_not eql 0
+      expect(subject.payload.token).not_to be_empty
     end
   end
 

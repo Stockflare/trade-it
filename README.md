@@ -49,6 +49,38 @@ We current support the following broker symbols
 }
 ```
 
+### Order Actions
+
+```
+{
+  buy: 'buy',
+  sell: 'sell',
+  buy_to_cover: 'buyToCover',
+  sell_short: 'sellShort'
+}
+```
+
+### Price Types
+
+```
+{
+  market: 'market',
+  limit: 'limit',
+  stop_market: 'stopMarket',
+  stop_limit: 'stopLimit'
+}
+```
+
+### Order Expirations
+```
+{
+  day: 'day',
+  gtc: 'gtc'
+}
+```
+
+Note that the test user does not support type `:gtc`
+
 ### TradeIt::User::Link
 
 Get a Users oAuth token
@@ -300,7 +332,8 @@ Successful response:
                                { quantity: 1, price: 103.34, ticker: 'GE', instrument_class: 'equity_or_etf', change: 9.0, holding: 'short' },
                                { quantity: 1, price: 103.34, ticker: 'MSFT', instrument_class: 'equity_or_etf', change: 9.0, holding: 'long' }],
                pages: 1,
-               page: 0 },
+               page: 0,
+               token: d3e72226aad646cea9e2d6177bd50953},
   messages: ['Position successfully fetched'] }
 ```
 
@@ -311,4 +344,71 @@ Failed Call will raise a `TradeIt::Errors::PositionException` with similar attri
   code: 500,
   description: 'Could Not Fetch Your Positions',
   messages:   ['The account foooooobaaarrrr is not valid or not active anymore.'] }
+```
+
+### TradeIt::Order::Preview
+
+Example call:
+
+```
+TradeIt::Order::Preview.new(
+  token: token,
+  account_number: account_number,
+  order_action: :buy,
+  quantity: 10,
+  ticker: 'aapl',
+  price_type: :market,
+  expiration: :day
+).call.response
+```
+
+Successful response:
+
+```
+{ raw:   { 'ackWarningsList' => [],
+           'longMessages' => nil,
+           'orderDetails' =>
+    { 'orderSymbol' => 'aapl',
+      'orderAction' => 'Buy',
+      'orderQuantity' => 10.0,
+      'orderExpiration' => 'Day',
+      'orderPrice' => 'Market',
+      'orderValueLabel' => 'Estimated Cost',
+      'orderMessage' => 'You are about to place a market order to buy AAPL',
+      'lastPrice' => '19.0',
+      'bidPrice' => '18.0',
+      'askPrice' => '22.0',
+      'timestamp' => 'Fri Feb 12 08:51:25 EST 2016',
+      'estimatedOrderValue' => 25.0,
+      'estimatedTotalValue' => 28.5,
+      'buyingPower' => 1234.0,
+      'longHoldings' => 12.0,
+      'estimatedOrderCommission' => 3.5 },
+           'orderId' => 1,
+           'shortMessage' => nil,
+           'status' => 'REVIEW_ORDER',
+           'token' => '140784ef96214a5186041abebdfe038a',
+           'warningsList' => [] },
+  status: 200,
+  payload:   { 'type' => 'review',
+               'ticker' => 'aapl',
+               'order_action' => :buy,
+               'quantity' => 10,
+               'expiration' => :day,
+               'price_label' => 'Market',
+               'value_label' => 'Estimated Cost',
+               'message' => 'You are about to place a market order to buy AAPL',
+               'last_price' => 19.0,
+               'bid_price' => 18.0,
+               'ask_price' => 22.0,
+               'timestamp' => 1455285085,
+               'buying_power' => 1234.0,
+               'estimated_commission' => 3.5,
+               'estimated_value' => 25.0,
+               'estimated_total' => 28.5,
+               'warnings' => [],
+               'must_acknowledge' => [],
+               'token' => '140784ef96214a5186041abebdfe038a' },
+  messages: [] }
+
 ```

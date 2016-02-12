@@ -29,7 +29,8 @@ module TradeIt
                                                  payload: {
                                                    positions: positions,
                                                    pages: result['totalPages'],
-                                                   page: result['currentPage']
+                                                   page: result['currentPage'],
+                                                   token: result['token']
                                                  },
                                                  messages: [result['shortMessage']].compact)
         else

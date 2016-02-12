@@ -32,5 +32,8 @@ module TradeIt
 
     class PositionException < TradeItException
     end
+
+    class OrderException < TradeItException
+    end
   end
 end

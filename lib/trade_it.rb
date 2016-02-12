@@ -10,6 +10,7 @@ module TradeIt
   autoload :User, 'trade_it/user'
   autoload :Errors, 'trade_it/errors'
   autoload :Positions, 'trade_it/positions'
+  autoload :Order, 'trade_it/order'
 
   class << self
     attr_writer :logger
@@ -30,6 +31,50 @@ module TradeIt
         ib: 'IB',
         tradier: 'Tradier',
         dummy: 'Dummy'
+      }
+    end
+
+    # Tradeit order actions
+    def order_actions
+      {
+        buy: 'buy',
+        sell: 'sell',
+        buy_to_cover: 'buyToCover',
+        sell_short: 'sellShort'
+      }
+    end
+
+    def preview_order_actions
+      {
+        buy: 'Buy',
+        sell: 'Sell',
+        buy_to_cover: 'Buy to Cover',
+        sell_short: 'Sell Short'
+      }
+    end
+
+    # Tradeit price types
+    def price_types
+      {
+        market: 'market',
+        limit: 'limit',
+        stop_market: 'stopMarket',
+        stop_limit: 'stopLimit'
+      }
+    end
+
+    # Tradeit order expirations
+    def order_expirations
+      {
+        day: 'day',
+        gtc: 'gtc'
+      }
+    end
+
+    def preview_order_expirations
+      {
+        day: 'Day',
+        gtc: 'Good Till Cancelled'
       }
     end
 
