@@ -40,6 +40,7 @@ module TradeIt
           fail TradeIt::Errors::PositionException.new(
             type: :error,
             code: 500,
+            broker_code: result['code'],                        
             description: result['shortMessage'],
             messages: result['longMessages']
           )

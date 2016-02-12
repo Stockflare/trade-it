@@ -65,10 +65,10 @@ module TradeIt
           #
           # Order failed
           #
-          pp result
           fail TradeIt::Errors::OrderException.new(
             type: :error,
             code: 500,
+            broker_code: result['code'],            
             description: result['shortMessage'],
             messages: result['longMessages']
           )

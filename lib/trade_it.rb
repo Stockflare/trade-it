@@ -52,6 +52,14 @@ module TradeIt
         sell_short: 'Sell Short'
       }
     end
+    def place_order_actions
+      {
+        buy: 'Buy',
+        sell: 'Sell',
+        buy_to_cover: 'BuyToCover',
+        sell_short: 'SellShort'
+      }
+    end
 
     # Tradeit price types
     def price_types
