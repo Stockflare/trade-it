@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'multi_json', ['>= 1.0']
   spec.add_runtime_dependency 'yajl-ruby', ['~> 1.2']
   spec.add_runtime_dependency 'httparty'
+  spec.add_runtime_dependency 'hashie'
 
   spec.add_development_dependency 'bundler', ['~> 1.6']
   spec.add_development_dependency 'rake', ['~> 10.3']

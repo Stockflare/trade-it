@@ -24,8 +24,8 @@ describe TradeIt::User::Verify do
   describe 'good answer' do
     it 'returns token' do
       expect(subject.status).to eql 200
-      expect(subject.payload[:type]).to eql 'success'
-      expect(subject.payload[:token]).not_to be_empty
+      expect(subject.payload.type).to eql 'success'
+      expect(subject.payload.token).not_to be_empty
     end
   end
 
@@ -40,9 +40,9 @@ describe TradeIt::User::Verify do
   describe 'user needing security question' do
     let(:answer) { 'foooooobaaarrrr' }
     it 'returns response with questions' do
-      expect(subject.payload[:type]).to eql 'verify'
-      expect(subject.payload[:challenge]).to eql 'question'
-      expect(subject.payload[:data]).to have_key :answers
+      expect(subject.payload.type).to eql 'verify'
+      expect(subject.payload.challenge).to eql 'question'
+      expect(subject.payload.data).to have_key :answers
     end
 
   end

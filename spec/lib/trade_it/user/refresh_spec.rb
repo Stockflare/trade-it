@@ -22,9 +22,9 @@ describe TradeIt::User::Refresh do
   describe 'good logout' do
     it 'returns token' do
       expect(subject.status).to eql 200
-      expect(subject.payload[:type]).to eql 'success'
-      expect(subject.payload[:token]).not_to be_empty
-      expect(subject.payload[:token]).to eql token
+      expect(subject.payload.type).to eql 'success'
+      expect(subject.payload.token).not_to be_empty
+      expect(subject.payload.token).to eql token
     end
   end
 

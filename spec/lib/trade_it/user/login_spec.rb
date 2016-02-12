@@ -11,8 +11,8 @@ describe TradeIt::User::Login do
       broker: broker
     ).call.response
   end
-  let(:user_id) { link.payload[:user_id] }
-  let(:user_token) {link.payload[:user_token]}
+  let(:user_id) { link.payload.user_id }
+  let(:user_token) {link.payload.user_token}
 
   subject do
     TradeIt::User::Login.new(
@@ -24,8 +24,8 @@ describe TradeIt::User::Login do
   describe 'good credentials' do
     it 'returns token' do
       expect(subject.status).to eql 200
-      expect(subject.payload[:type]).to eql 'success'
-      expect(subject.payload[:token]).not_to be_empty
+      expect(subject.payload.type).to eql 'success'
+      expect(subject.payload.token).not_to be_empty
     end
   end
 
@@ -40,15 +40,15 @@ describe TradeIt::User::Login do
   describe 'user needing security question' do
     let(:username) { 'dummySecurity' }
     it 'returns response with questions' do
-      expect(subject.payload[:type]).to eql 'verify'
-      expect(subject.payload[:challenge]).to eql 'question'
-      expect(subject.payload[:data]).to have_key :answers
+      expect(subject.payload.type).to eql 'verify'
+      expect(subject.payload.challenge).to eql 'question'
+      expect(subject.payload.data).to have_key :answers
     end
 
     describe 'image' do
       let(:username) { 'dummySecurityImage' }
       it 'returns image in response' do
-        expect(subject.payload[:data]).to have_key :encoded
+        expect(subject.payload.data.encoded).not_to be_empty
       end
     end
   end

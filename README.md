@@ -14,7 +14,9 @@ This Gem wraps all interactions with The [TradeIt](https://www.trade.it/document
 
 Once installed all TradeIt actions are objects within the `TradeIt` module.  Each object is initialized with the parameters required for the TradeIt call and has one `call` method to execute the communications with TradeIt.  All objects return the result of the TradeIt interaction in a `response` attribute that supports `to_h`
 
-It is expected that most Stockflare use cases will inly use the `response.payload` as this is a parsed version of the TradeIt response suitable for Stockflare's use.
+It is expected that most Stockflare use cases will only use the `response.payload` as this is a parsed version of the TradeIt response suitable for Stockflare and it is this output that is tested.  For convenience the `response.payload` is delivered as a `Hashie::Mash` to allow for method based access, for instance you can can access the status of the call by using `response.payload.status`.
+
+Additionally a `response.raw` is provided that contains the raw TradeIt response.  This is provided for development and debug purposes only.  Upstream users should only rely on the `response.payload` and `response.messages`.  This will allow us to deal with minor breaking changes in the TradeIt API (which is currently in QA) without having to make code changes in upstream users.
 
 All Error cases are handled by raising a subclass of `TradeIt::Errors::TradeItException`, this object exposes a number of attributes that can you can `to_h` to the consumer.
 

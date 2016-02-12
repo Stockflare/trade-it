@@ -16,9 +16,9 @@ describe TradeIt::User::Link do
   describe 'good credentials' do
     it 'returns token' do
       expect(subject.status).to eql 200
-      expect(subject.payload[:type]).to eql 'success'
-      expect(subject.payload[:user_token]).not_to be_empty
-      expect(subject.payload[:user_id]).not_to be_empty
+      expect(subject.payload.type).to eql 'success'
+      expect(subject.payload.user_token).not_to be_empty
+      expect(subject.payload.user_id).not_to be_empty
     end
   end
 
