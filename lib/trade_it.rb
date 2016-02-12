@@ -52,6 +52,7 @@ module TradeIt
         sell_short: 'Sell Short'
       }
     end
+
     def place_order_actions
       {
         buy: 'Buy',
