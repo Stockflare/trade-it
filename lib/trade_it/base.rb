@@ -61,6 +61,5 @@ module TradeIt
     values do
       attribute :response, Response
     end
-
   end
 end

@@ -1,4 +1,4 @@
-require "trade_it/version"
+require 'trade_it/version'
 
 require 'multi_json'
 require 'yajl/json_gem'
@@ -18,7 +18,7 @@ module TradeIt
 
     # Tradeit brokers as symbols
     def brokers
-      return {
+      {
         td: 'TD',
         etrade: 'Etrade',
         scottrade: 'Scottrade',
@@ -37,11 +37,11 @@ module TradeIt
       if ENV['TRADEIT_BASE_URI'] && ENV['TRADEIT_BASE_URI'] != ''
         return ENV['TRADEIT_BASE_URI']
       else
-         raise TradeIt::Errors::ConfigException.new(
+        fail TradeIt::Errors::ConfigException.new(
           type: :error,
           code: 500,
-          description: "TRADEIT_BASE_URI missing",
-          messages: ["TRADEIT_BASE_URI environment variable has not been set"]
+          description: 'TRADEIT_BASE_URI missing',
+          messages: ['TRADEIT_BASE_URI environment variable has not been set']
         )
       end
     end
@@ -50,22 +50,19 @@ module TradeIt
       if ENV['TRADEIT_API_KEY'] && ENV['TRADEIT_API_KEY'] != ''
         return ENV['TRADEIT_API_KEY']
       else
-        raise TradeIt::Errors::ConfigException.new(
+        fail TradeIt::Errors::ConfigException.new(
           type: :error,
           code: 500,
-          description: "TRADEIT_API_KEY missing",
-          messages: ["TRADEIT_API_KEY environment variable has not been set"]
+          description: 'TRADEIT_API_KEY missing',
+          messages: ['TRADEIT_API_KEY environment variable has not been set']
         )
       end
     end
 
-
     def logger
       @logger ||= Logger.new($stdout).tap do |log|
-        log.progname = self.name
+        log.progname = name
       end
     end
-
-
   end
 end

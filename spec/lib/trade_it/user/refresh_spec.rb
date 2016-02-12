@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe TradeIt::User::Refresh do
-  let(:username) { "dummy" }
-  let(:password) { "pass" }
+  let(:username) { 'dummy' }
+  let(:password) { 'pass' }
   let(:broker) { :dummy }
   let!(:user) do
     TradeIt::User::LinkAndLogin.new(
@@ -28,12 +28,10 @@ describe TradeIt::User::Refresh do
     end
   end
 
-
   describe 'bad token' do
     let(:token) { 'foooooobaaarrrr' }
     it 'throws error' do
-      expect{subject}.to raise_error(TradeIt::Errors::LoginException)
+      expect { subject }.to raise_error(TradeIt::Errors::LoginException)
     end
   end
-
 end

@@ -6,7 +6,6 @@ module TradeIt
     autoload :Get, 'trade_it/positions/get'
 
     class << self
-
       #
       # Parse a Tradeit Login or Verify response into our format
       #
@@ -25,28 +24,26 @@ module TradeIt
               holding: p['holdingType'].downcase
             ).to_h
           end
-          response = TradeIt::Base::Response.new({
-            raw: result,
-            status: 200,
-            payload: {
-              positions: positions,
-              pages: result['totalPages'],
-              page: result['currentPage'],
-            },
-            messages: [result['shortMessage']].compact
-          })
+          response = TradeIt::Base::Response.new(raw: result,
+                                                 status: 200,
+                                                 payload: {
+                                                   positions: positions,
+                                                   pages: result['totalPages'],
+                                                   page: result['currentPage']
+                                                 },
+                                                 messages: [result['shortMessage']].compact)
         else
           #
           # Login failed
           #
-          raise TradeIt::Errors::PositionException.new(
+          fail TradeIt::Errors::PositionException.new(
             type: :error,
             code: 500,
             description: result['shortMessage'],
             messages: result['longMessages']
           )
         end
-        return response
+        response
       end
     end
   end

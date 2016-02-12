@@ -1,7 +1,6 @@
 module TradeIt
   module User
     class Login < TradeIt::Base
-
       values do
         attribute :user_id, String
         attribute :user_token, String
@@ -11,8 +10,8 @@ module TradeIt
         uri =  URI.join(TradeIt.api_uri, 'v1/user/authenticate').to_s
 
         body = {
-          userId: self.user_id,
-          userToken: self.user_token,
+          userId: user_id,
+          userToken: user_token,
           apiKey: TradeIt.api_key
         }
 
@@ -20,8 +19,8 @@ module TradeIt
 
         self.response = TradeIt::User.parse_result(result)
 
-        TradeIt.logger.info self.response.to_h
-        return self
+        TradeIt.logger.info response.to_h
+        self
       end
     end
   end

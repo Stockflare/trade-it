@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe TradeIt::User::Link do
-  let(:username) { "dummy" }
-  let(:password) { "pass" }
+  let(:username) { 'dummy' }
+  let(:password) { 'pass' }
   let(:broker) { :dummy }
 
   subject do
@@ -22,12 +22,10 @@ describe TradeIt::User::Link do
     end
   end
 
-
   describe 'bad credentials' do
     let(:username) { 'foooooobaaarrrr' }
     it 'throws error' do
-      expect{subject}.to raise_error(TradeIt::Errors::LoginException)
+      expect { subject }.to raise_error(TradeIt::Errors::LoginException)
     end
   end
-
 end

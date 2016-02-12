@@ -12,12 +12,12 @@ module TradeIt
 
       def initialize(*args)
         super
-        self.log
+        log
       end
 
       def log
-        pp(self.to_h)
-        TradeIt.logger.error self.to_h
+        pp(to_h)
+        TradeIt.logger.error to_h
       end
     end
 

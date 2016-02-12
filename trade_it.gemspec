@@ -4,14 +4,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'trade_it/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "trade_it"
+  spec.name          = 'trade_it'
   spec.version       = TradeIt::VERSION
-  spec.authors       = ["Stockflare Ltd"]
-  spec.email         = ["info@stockflare.com"]
+  spec.authors       = ['Stockflare Ltd']
+  spec.email         = ['info@stockflare.com']
 
-  spec.summary       = %q{Stockflare integration with TradeIT API }
-  spec.description   = %q{Stockflare integration with TradeIT API https://www.trade.it/documentation}
-  spec.homepage      = ""
+  spec.summary       = 'Stockflare integration with TradeIT API '
+  spec.description   = 'Stockflare integration with TradeIT API https://www.trade.it/documentation'
+  spec.homepage      = ''
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")

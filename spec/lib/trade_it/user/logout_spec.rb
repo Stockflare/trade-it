@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe TradeIt::User::Logout do
-  let(:username) { "dummy" }
-  let(:password) { "pass" }
+  let(:username) { 'dummy' }
+  let(:password) { 'pass' }
   let(:broker) { :dummy }
   let!(:user) do
     TradeIt::User::LinkAndLogin.new(
@@ -27,12 +27,10 @@ describe TradeIt::User::Logout do
     end
   end
 
-
   describe 'bad logout' do
     let(:token) { 'foooooobaaarrrr' }
     it 'throws error' do
-      expect{subject}.to raise_error(TradeIt::Errors::LoginException)
+      expect { subject }.to raise_error(TradeIt::Errors::LoginException)
     end
   end
-
 end

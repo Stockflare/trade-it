@@ -1,7 +1,6 @@
 module TradeIt
   module User
     class LinkAndLogin < TradeIt::Base
-
       values do
         attribute :broker, Symbol
         attribute :username, String
@@ -20,7 +19,7 @@ module TradeIt
           user_token: link.payload[:user_token]
         ).call.response
 
-        return self
+        self
       end
     end
   end

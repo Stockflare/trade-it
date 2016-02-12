@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe TradeIt::Positions::Get do
-  let(:username) { "dummy" }
-  let(:password) { "pass" }
+  let(:username) { 'dummy' }
+  let(:password) { 'pass' }
   let(:broker) { :dummy }
   let!(:user) do
     TradeIt::User::LinkAndLogin.new(
@@ -12,7 +12,7 @@ describe TradeIt::Positions::Get do
     ).call.response.payload
   end
   let(:token) { user.token }
-  let(:account_number) { user.accounts[0].account_number}
+  let(:account_number) { user.accounts[0].account_number }
 
   subject do
     TradeIt::Positions::Get.new(
@@ -31,12 +31,10 @@ describe TradeIt::Positions::Get do
     end
   end
 
-
   describe 'bad account' do
     let(:account_number) { 'foooooobaaarrrr' }
     it 'throws error' do
-      expect{subject}.to raise_error(TradeIt::Errors::PositionException)
+      expect { subject }.to raise_error(TradeIt::Errors::PositionException)
     end
   end
-
 end

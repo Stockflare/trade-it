@@ -9,7 +9,7 @@ require 'pry-byebug'
 
 Dir[Pathname(__FILE__).dirname.join('shared/*.rb').to_s].each { |f| require f }
 
-Dir["./spec/support/**/*.rb"].each {|f| require f }
+Dir['./spec/support/**/*.rb'].each { |f| require f }
 
 Dir["#{File.expand_path('../', __FILE__)}/factories/**/*.rb"].each { |f| require f }
 

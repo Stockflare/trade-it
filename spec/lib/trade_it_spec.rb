@@ -15,7 +15,7 @@ describe TradeIt do
     end
     it 'raises error with no ENV' do
       ENV['TRADEIT_BASE_URI'] = ''
-      expect{TradeIt.api_uri}.to raise_error(TradeIt::Errors::ConfigException)
+      expect { TradeIt.api_uri }.to raise_error(TradeIt::Errors::ConfigException)
     end
   end
   describe '#api_key' do
@@ -24,7 +24,7 @@ describe TradeIt do
     end
     it 'raises error with no ENV' do
       ENV['TRADEIT_API_KEY'] = ''
-      expect{TradeIt.api_uri}.to raise_error(TradeIt::Errors::ConfigException)
+      expect { TradeIt.api_uri }.to raise_error(TradeIt::Errors::ConfigException)
     end
   end
 end

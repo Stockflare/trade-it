@@ -11,7 +11,6 @@ module TradeIt
     autoload :Refresh, 'trade_it/user/refresh'
 
     class << self
-
       #
       # Parse a Tradeit Login or Verify response into our format
       #
@@ -29,16 +28,14 @@ module TradeIt
               ).to_h
             end
           end
-          response = TradeIt::Base::Response.new({
-            raw: result,
-            status: 200,
-            payload: {
-              type: 'success',
-              token: result["token"],
-              accounts: accounts
-            },
-            messages: [result['shortMessage']].compact
-          })
+          response = TradeIt::Base::Response.new(raw: result,
+                                                 status: 200,
+                                                 payload: {
+                                                   type: 'success',
+                                                   token: result['token'],
+                                                   accounts: accounts
+                                                 },
+                                                 messages: [result['shortMessage']].compact)
         elsif result['status'] == 'INFORMATION_NEEDED'
           #
           # User Asked for security question
@@ -53,22 +50,20 @@ module TradeIt
               answers: result['securityQuestionOptions']
             }
           end
-          response = TradeIt::Base::Response.new({
-            raw: result,
-            status: 200,
-            payload: {
-              type: 'verify',
-              challenge: result['challengeImage'] ? 'image' : 'question',
-              token: result["token"],
-              data: data
-            },
-            messages: [result['shortMessage']].compact
-          })
+          response = TradeIt::Base::Response.new(raw: result,
+                                                 status: 200,
+                                                 payload: {
+                                                   type: 'verify',
+                                                   challenge: result['challengeImage'] ? 'image' : 'question',
+                                                   token: result['token'],
+                                                   data: data
+                                                 },
+                                                 messages: [result['shortMessage']].compact)
         else
           #
           # Login failed
           #
-          raise TradeIt::Errors::LoginException.new(
+          fail TradeIt::Errors::LoginException.new(
             type: :error,
             code: 500,
             description: result['shortMessage'],
@@ -77,7 +72,7 @@ module TradeIt
         end
 
         # pp(response.to_h)
-        return response
+        response
       end
     end
   end
