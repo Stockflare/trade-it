@@ -13,8 +13,10 @@ describe TradeIt do
     it 'returns ENV - TRADEIT_BASE_URI' do
       expect(TradeIt.api_uri).to eql ENV['TRADEIT_BASE_URI']
     end
-    it 'raises error with no ENV' do
-      ENV['TRADEIT_BASE_URI'] = ''
+    it 'raises error when not configured' do
+      TradeIt.configure do |config|
+        config.api_uri = nil
+      end
       expect { TradeIt.api_uri }.to raise_error(TradeIt::Errors::ConfigException)
     end
   end
@@ -22,8 +24,10 @@ describe TradeIt do
     it 'returns ENV - TRADEIT_API_KEY' do
       expect(TradeIt.api_key).to eql ENV['TRADEIT_API_KEY']
     end
-    it 'raises error with no ENV' do
-      ENV['TRADEIT_API_KEY'] = ''
+    it 'raises error with no key' do
+      TradeIt.configure do |config|
+        config.api_key = nil
+      end
       expect { TradeIt.api_uri }.to raise_error(TradeIt::Errors::ConfigException)
     end
   end

@@ -13,9 +13,16 @@ module TradeIt
   autoload :Order, 'trade_it/order'
 
   class << self
-    attr_writer :logger
+    attr_writer :logger, :api_uri, :api_key
 
-    attr_reader :brokers
+
+    # Helper to configure .
+    #
+    # @yield [Odin] Yields the {Tradeit} module.
+    def configure
+      yield self
+    end
+
 
     # Tradeit brokers as symbols
     def brokers
@@ -88,27 +95,27 @@ module TradeIt
     end
 
     def api_uri
-      if ENV['TRADEIT_BASE_URI'] && ENV['TRADEIT_BASE_URI'] != ''
-        return ENV['TRADEIT_BASE_URI']
+      if @api_uri
+        return @api_uri
       else
         fail TradeIt::Errors::ConfigException.new(
           type: :error,
           code: 500,
-          description: 'TRADEIT_BASE_URI missing',
-          messages: ['TRADEIT_BASE_URI environment variable has not been set']
+          description: 'api_uri missing',
+          messages: ['api_uri configuration variable has not been set']
         )
       end
     end
 
     def api_key
-      if ENV['TRADEIT_API_KEY'] && ENV['TRADEIT_API_KEY'] != ''
-        return ENV['TRADEIT_API_KEY']
+      if @api_key
+        return @api_key
       else
         fail TradeIt::Errors::ConfigException.new(
           type: :error,
           code: 500,
-          description: 'TRADEIT_API_KEY missing',
-          messages: ['TRADEIT_API_KEY environment variable has not been set']
+          description: 'api_key missing',
+          messages: ['api_key configuration variable has not been set']
         )
       end
     end

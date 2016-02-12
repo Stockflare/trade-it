@@ -20,14 +20,15 @@ Additionally a `response.raw` is provided that contains the raw TradeIt response
 
 All Error cases are handled by raising a subclass of `TradeIt::Errors::TradeItException`, this object exposes a number of attributes that can you can `to_h` to the consumer.
 
-### Environment Variables
+### Configuration Values
 
-Two variables need to be set
+Two attributes need to be set
 
 ```
-TRADEIT_BASE_URI=https://ems.qa.tradingticket.com/api/v1
-TRADEIT_API_KEY=xxxxxxxx
-
+TradeIt.configure do |config|
+  config.api_uri = ENV['TRADEIT_BASE_URI']
+  config.api_key = ENV['TRADEIT_API_KEY']
+end
 ```
 
 ### Brokers
@@ -416,3 +417,73 @@ Successful response:
 Any messages in  `payload.warnings` must be displayed to the user.
 
 any messages in `payload.must_acknowledge` must be shown to the user with check boxes that they must acknowledge
+
+### TradeIt::Order::Place
+
+Place an order previously reviewed by `TradeIt::Order::Preview`
+
+Example Call
+
+```
+TradeIt::Order::Place.new(
+  token: preview_token
+).call.response
+```
+
+Example response
+
+```
+{ raw:   { 'broker' => 'your broker',
+           'confirmationMessage' =>
+    'Your order message 4049c988b1422d52217af9 to buy 10 shares of aapl at market price has been successfully transmitted to your broker at 12/02/16 1:19 PM EST.',
+           'longMessages' => ['Transmitted succesfully to your broker'],
+           'orderInfo' =>
+    { 'universalOrderInfo' =>
+      { 'action' => 'buy',
+        'quantity' => '10',
+        'symbol' => 'aapl',
+        'price' => { 'type' => 'market' },
+        'expiration' => 'day' },
+      'action' => 'Buy',
+      'quantity' => 10,
+      'symbol' => 'aapl',
+      'price' =>
+      { 'type' => 'Market',
+        'last' => 19.0,
+        'bid' => 18.0,
+        'ask' => 22.0,
+        'timestamp' => '2016-02-12T18:19:20Z' },
+      'expiration' => 'Good For The Day' },
+           'orderNumber' => '4049c988b1422d52217af9',
+           'shortMessage' => 'Order Successfully Submitted',
+           'status' => 'SUCCESS',
+           'timestamp' => '12/02/16 1:19 PM EST',
+           'token' => 'dc2427db16d244e7967857cc140cf011' },
+  status: 200,
+  payload:   { 'type' => 'success',
+               'ticker' => 'aapl',
+               'order_action' => :buy,
+               'quantity' => 10,
+               'expiration' => :day,
+               'price_label' => 'Market',
+               'message' =>
+    'Your order message 4049c988b1422d52217af9 to buy 10 shares of aapl at market price has been successfully transmitted to your broker at 12/02/16 1:19 PM EST.',
+               'last_price' => 19.0,
+               'bid_price' => 18.0,
+               'ask_price' => 22.0,
+               'price_timestamp' => 1_455_301_160,
+               'timestamp' => 1_329_416_340,
+               'order_number' => '4049c988b1422d52217af9',
+               'token' => 'dc2427db16d244e7967857cc140cf011' },
+  messages: ['Order Successfully Submitted'] }
+```
+
+Failed Call will raise a `TradeIt::Errors::OrderException` with similar attributes:
+
+```
+{:type=>:error,
+ :code=>500,
+ :broker_code=>600,
+ :description=>"Could Not Complete Your Request",
+ :messages=>["Your session has expired. Please try again"]}
+```
