@@ -17,13 +17,14 @@ describe TradeIt::Order::Preview do
   let(:order_action) { :buy }
   let(:price_type) { :market }
   let(:order_expiration) { :day }
+  let(:quantity) { 10 }
 
   subject do
     TradeIt::Order::Preview.new(
       token: token,
       account_number: account_number,
       order_action: order_action,
-      quantity: 10,
+      quantity: quantity,
       ticker: 'aapl',
       price_type: price_type,
       expiration: order_expiration
@@ -134,6 +135,23 @@ describe TradeIt::Order::Preview do
         expect(subject.payload.type).to eql 'review'
         expect(subject.payload.price_label).to eql '$11.00 (trigger: $10.00)'
       end
+    end
+  end
+
+  describe 'order that brings back warnings' do
+    # Quantity above 50 will trigger warnings with the test user
+    let(:quantity) { 75 }
+    it 'returns warnings' do
+      expect(subject.payload.warnings.count).to be > 0
+      expect(subject.payload.must_acknowledge.count).to be > 0
+    end
+  end
+
+  describe 'order that fails' do
+    # Quantity above 100 will trigger errors with the test user
+    let(:quantity) { 150 }
+    it 'throws error' do
+      expect { subject }.to raise_error(TradeIt::Errors::OrderException)
     end
   end
 

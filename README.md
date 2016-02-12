@@ -412,3 +412,7 @@ Successful response:
   messages: [] }
 
 ```
+
+Any messages in  `payload.warnings` must be displayed to the user.
+
+any messages in `payload.must_acknowledge` must be shown to the user with check boxes that they must acknowledge
