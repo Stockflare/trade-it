@@ -35,7 +35,6 @@ module TradeIt
         trade_station: 'TradeStation',
         robinhood: 'Robinhood',
         options_house: 'OptionsHouse',
-        ib: 'IB',
         tradier: 'Tradier',
         dummy: 'Dummy'
       }
