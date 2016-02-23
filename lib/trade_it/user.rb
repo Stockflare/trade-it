@@ -65,8 +65,7 @@ module TradeIt
           #
           fail TradeIt::Errors::LoginException.new(
             type: :error,
-            code: 500,
-            broker_code: result['code'],
+            code: result['code'],
             description: result['shortMessage'],
             messages: result['longMessages']
           )

@@ -29,12 +29,12 @@ module TradeIt
         else
           fail TradeIt::Errors::LoginException.new(
             type: :error,
-            code: 500,
-            broker_code: result['code'],
+            code: result['code'],
             description: result['shortMessage'],
             messages: result['longMessages']
           )
         end
+        # pp response.to_h
         TradeIt.logger.info response.to_h
         self
       end

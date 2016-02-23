@@ -6,7 +6,6 @@ module TradeIt
       values do
         attribute :type, Symbol
         attribute :code, Integer
-        attribute :broker_code, Integer
         attribute :description, String
         attribute :messages, Array[String]
       end
@@ -17,7 +16,6 @@ module TradeIt
       end
 
       def log
-        pp(to_h)
         TradeIt.logger.error to_h
       end
     end
