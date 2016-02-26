@@ -250,7 +250,7 @@ Successful logout response
   messages: [] }
 ```
 
-Failed Logout will raise a `TradeIt::Errors::LogoutException` with similar attributes:
+Failed Logout will raise a `TradeIt::Errors::LoginException` with similar attributes:
 
 ```
 { type: :error,
@@ -285,7 +285,7 @@ Successful Response:
   messages: [] }
 ```
 
-Failed Logout will raise a `TradeIt::Errors::LogoutException` with similar attributes:
+Failed Logout will raise a `TradeIt::Errors::LoginException` with similar attributes:
 
 ```
 { type: :error,
