@@ -17,7 +17,7 @@ module TradeIt
           positions = result['positions'].map do |p|
             TradeIt::Base::Position.new(
               quantity: p['quantity'],
-              price: p['costbasis'],
+              cost_basis: p['costbasis'],
               ticker: p['symbol'],
               instrument_class: p['symbolClass'].downcase,
               change: p['totalGainLossDollar'],
