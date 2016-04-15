@@ -45,7 +45,7 @@ module TradeIt
             last_price: details['lastPrice'].to_f,
             bid_price: details['bidPrice'].to_f,
             ask_price: details['askPrice'].to_f,
-            timestamp: Time.parse(details['timestamp']).utc.to_i,
+            timestamp: self.parse_time(details['timestamp']),
             buying_power: details['buyingPower'].to_f,
             estimated_commission: details['estimatedOrderCommission'].to_f,
             estimated_value: details['estimatedOrderValue'].to_f,
@@ -74,6 +74,14 @@ module TradeIt
         end
         TradeIt.logger.info response.to_h
         self
+      end
+
+      def parse_time(time_string)
+        begin
+          Time.parse(time_string).utc.to_i
+        rescue
+          Time.current.utc.to_i
+        end
       end
     end
   end
