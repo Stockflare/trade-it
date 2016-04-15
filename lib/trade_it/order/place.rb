@@ -59,7 +59,7 @@ module TradeIt
         begin
           Time.parse(time_string).utc.to_i
         rescue
-          Time.current.utc.to_i
+          Time.now.utc.to_i
         end
       end
     end
