@@ -28,8 +28,8 @@ module TradeIt
             last_price: details['price']['last'].to_f,
             bid_price: details['price']['bid'].to_f,
             ask_price: details['price']['ask'].to_f,
-            price_timestamp: Time.parse(details['price']['timestamp']).utc.to_i,
-            timestamp: Time.parse(result['timestamp']).utc.to_i,
+            price_timestamp: self.parse_time(details['price']['timestamp']),
+            timestamp: self.parse_time(result['timestamp']),
             order_number: result['orderNumber'],
             token: result['token']
           }
@@ -53,6 +53,14 @@ module TradeIt
         end
         TradeIt.logger.info response.to_h
         self
+      end
+
+      def parse_time(time_string)
+        begin
+          Time.parse(time_string).utc.to_i
+        rescue
+          Time.current.utc.to_i
+        end
       end
     end
   end
