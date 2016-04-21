@@ -3,6 +3,7 @@ module TradeIt
     class Place < TradeIt::Base
       values do
         attribute :token, String
+        attribute :price, Float
       end
 
       def call
@@ -31,7 +32,8 @@ module TradeIt
             price_timestamp: self.parse_time(details['price']['timestamp']),
             timestamp: self.parse_time(result['timestamp']),
             order_number: result['orderNumber'],
-            token: result['token']
+            token: result['token'],
+            price: self.price
           }
 
           self.response = TradeIt::Base::Response.new(

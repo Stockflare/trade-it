@@ -33,6 +33,8 @@ describe TradeIt::Order::Place do
     {}
   end
 
+  let(:price) { 123.45 }
+
   let!(:preview) do
     TradeIt::Order::Preview.new(
       base_order.merge(order_extras)
@@ -43,7 +45,8 @@ describe TradeIt::Order::Place do
 
   subject do
     TradeIt::Order::Place.new(
-      token: preview_token
+      token: preview_token,
+      price: price
     ).call.response
   end
 
@@ -64,6 +67,7 @@ describe TradeIt::Order::Place do
       expect(subject.payload.price_timestamp).to be > 0
       expect(subject.payload.timestamp).to be > 0
       expect(subject.payload.order_number).not_to be_empty
+      expect(subject.payload.price).to eql price
     end
   end
 
