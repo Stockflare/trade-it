@@ -487,3 +487,102 @@ Failed Call will raise a `TradeIt::Errors::OrderException` with similar attribut
  :description=>"Could Not Complete Your Request",
  :messages=>["Your session has expired. Please try again"]}
 ```
+
+## TradeIt::Order::Status
+
+Get the status of all user orders or get the status of a single order
+
+Example Call
+
+```
+TradeIt::Order::Place.new(
+  token: preview_token,
+  account_number,
+  order_number
+).call.response
+```
+
+Omit the `order_number` to get the status of all orders for the account
+
+Example response
+```
+{:raw=>
+  {"accountNumber"=>"brkAcct1",
+   "longMessages"=>nil,
+   "orderStatusDetailsList"=>
+    [{"groupOrderId"=>nil,
+      "groupOrderType"=>"null",
+      "groupOrders"=>[],
+      "orderExpiration"=>"DAY",
+      "orderLegs"=>
+       [{"action"=>"BUY",
+         "filledQuantity"=>0,
+         "fills"=>[],
+         "orderedQuantity"=>5000,
+         "priceInfo"=>
+          {"bracketLimitPrice"=>0.0,
+           "conditionFollowPrice"=>nil,
+           "conditionPrice"=>0.0,
+           "conditionSymbol"=>nil,
+           "conditionType"=>nil,
+           "initialStopPrice"=>0.0,
+           "limitPrice"=>0.0,
+           "stopPrice"=>0.0,
+           "trailPrice"=>0.0,
+           "triggerPrice"=>0.0,
+           "type"=>"MARKET"},
+         "symbol"=>"CMG"}],
+      "orderNumber"=>"123",
+      "orderStatus"=>"OPEN",
+      "orderType"=>"EQ"},
+     {"groupOrderId"=>nil,
+      "groupOrderType"=>"null",
+      "groupOrders"=>[],
+      "orderExpiration"=>"GTC",
+      "orderLegs"=>
+       [{"action"=>"SELL_SHORT",
+         "filledQuantity"=>6000,
+         "fills"=>
+          [{"price"=>123.45,
+            "quantity"=>6000,
+            "timestamp"=>"01/01/15 12:34 PM EST"}],
+         "orderedQuantity"=>10000,
+         "priceInfo"=>
+          {"bracketLimitPrice"=>0.0,
+           "conditionFollowPrice"=>nil,
+           "conditionPrice"=>0.0,
+           "conditionSymbol"=>nil,
+           "conditionType"=>nil,
+           "initialStopPrice"=>0.0,
+           "limitPrice"=>67.89,
+           "stopPrice"=>123.45,
+           "trailPrice"=>0.0,
+           "triggerPrice"=>0.0,
+           "type"=>"STOP_LIMIT"},
+         "symbol"=>"MCD"}],
+      "orderNumber"=>"456",
+      "orderStatus"=>"PART_FILLED",
+      "orderType"=>"EQ"}],
+   "shortMessage"=>"Order statuses successfully fetched",
+   "status"=>"SUCCESS",
+   "token"=>"bba1c52b409245afb86919b9c3d7b898"},
+ :status=>200,
+ :payload=>
+  {"type"=>"success",
+   "orders"=>
+    [{"ticker"=>"cmg",
+      "order_action"=>:buy,
+      "filled_quantity"=>0,
+      "filled_price"=>0.0,
+      "order_number"=>"123",
+      "quantity"=>5000,
+      "expiration"=>:day},
+     {"ticker"=>"mcd",
+      "order_action"=>:sell_short,
+      "filled_quantity"=>6000,
+      "filled_price"=>123.45,
+      "order_number"=>"456",
+      "quantity"=>10000,
+      "expiration"=>:gtc}],
+   "token"=>"bba1c52b409245afb86919b9c3d7b898"},
+```

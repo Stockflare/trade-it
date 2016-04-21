@@ -59,6 +59,20 @@ module TradeIt
       }
     end
 
+    def order_status_actions
+      {
+        'BUY' => :buy,
+        'BUY_OPEN' => :buy_open,
+        'BUY_CLOSE' => :buy_close,
+        'BUY_TO_COVER' => :buy_to_cover,
+        'SELL' => :sell,
+        'SELL_OPEN' => :sell_open,
+        'SELL_CLOSE' => :sell_close,
+        'SELL_SHORT' => :sell_short,
+        'UNKNOWN' => :unknown
+      }
+    end
+
     def place_order_actions
       {
         buy: 'Buy',
@@ -83,6 +97,15 @@ module TradeIt
       {
         day: 'day',
         gtc: 'gtc'
+      }
+    end
+
+    def order_status_expirations
+      {
+        'DAY' => :day,
+        'GTC' => :gtc,
+        'GOOD_TROUGH_DATE' => :gtd,
+        'UNKNOWN' => :unknown
       }
     end
 
