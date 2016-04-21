@@ -568,21 +568,87 @@ Example response
    "token"=>"bba1c52b409245afb86919b9c3d7b898"},
  :status=>200,
  :payload=>
+ {"type"=>"success",
+  "orders"=>
+   [{"ticker"=>"cmg",
+     "order_action"=>:buy,
+     "filled_quantity"=>0,
+     "filled_price"=>0.0,
+     "order_number"=>"123",
+     "quantity"=>5000,
+     "expiration"=>:day,
+     "status"=>:open},
+    {"ticker"=>"mcd",
+     "order_action"=>:sell_short,
+     "filled_quantity"=>6000,
+     "filled_price"=>123.45,
+     "order_number"=>"456",
+     "quantity"=>10000,
+     "expiration"=>:gtc,
+     "status"=>:part_filled}],
+  "token"=>"3384aeb24c2143f5b78ee3e1311a40eb"}
+```
+## TradeIt::Order::Cancel
+
+Cancel an unfulfilled order.  The payload is identical to `TradeIt::Order::Status` in that it return the order status of the cancelled order
+
+Example Call
+
+```
+TradeIt::Order::Cancel.new(
+  token: preview_token,
+  account_number,
+  order_number
+).call.response
+```
+
+
+Example response
+```
+{:raw=>
+  {"accountNumber"=>"brkAcct1",
+   "longMessages"=>nil,
+   "orderStatusDetailsList"=>
+    [{"groupOrderId"=>nil,
+      "groupOrderType"=>"null",
+      "groupOrders"=>[],
+      "orderExpiration"=>"GTC",
+      "orderLegs"=>
+       [{"action"=>"BUY",
+         "filledQuantity"=>0,
+         "fills"=>[],
+         "orderedQuantity"=>275000,
+         "priceInfo"=>
+          {"bracketLimitPrice"=>0.0,
+           "conditionFollowPrice"=>nil,
+           "conditionPrice"=>0.0,
+           "conditionSymbol"=>nil,
+           "conditionType"=>nil,
+           "initialStopPrice"=>0.0,
+           "limitPrice"=>0.0,
+           "stopPrice"=>0.0,
+           "trailPrice"=>0.0,
+           "triggerPrice"=>0.0,
+           "type"=>"MARKET"},
+         "symbol"=>"FTFY"}],
+      "orderNumber"=>"456",
+      "orderStatus"=>"PENDING_CANCEL",
+      "orderType"=>"EQ"}],
+   "shortMessage"=>"Order statuses successfully fetched",
+   "status"=>"SUCCESS",
+   "token"=>"d9c45bb6223f425c865ed7c88042ad1f"},
+ :status=>200,
+ :payload=>
   {"type"=>"success",
    "orders"=>
-    [{"ticker"=>"cmg",
+    [{"ticker"=>"ftfy",
       "order_action"=>:buy,
       "filled_quantity"=>0,
       "filled_price"=>0.0,
-      "order_number"=>"123",
-      "quantity"=>5000,
-      "expiration"=>:day},
-     {"ticker"=>"mcd",
-      "order_action"=>:sell_short,
-      "filled_quantity"=>6000,
-      "filled_price"=>123.45,
       "order_number"=>"456",
-      "quantity"=>10000,
-      "expiration"=>:gtc}],
-   "token"=>"bba1c52b409245afb86919b9c3d7b898"},
+      "quantity"=>275000,
+      "expiration"=>:gtc,
+      "status"=>:pending_cancel}],
+   "token"=>"d9c45bb6223f425c865ed7c88042ad1f"},
+ :messages=>["Order statuses successfully fetched"]}
 ```

@@ -1,6 +1,6 @@
 module TradeIt
   module Order
-    class Status < TradeIt::Base
+    class Cancel < TradeIt::Base
       values do
         attribute :token, String
         attribute :account_number, String
@@ -8,17 +8,14 @@ module TradeIt
       end
 
       def call
-        uri =  URI.join(TradeIt.api_uri, 'v1/order/getAllOrderStatus').to_s
-        uri =  URI.join(TradeIt.api_uri, 'v1/order/getSingleOrderStatus').to_s if self.order_number
+        uri =  URI.join(TradeIt.api_uri, 'v1/order/cancelOrder').to_s
 
         body = {
           token: token,
           accountNumber: account_number,
+          orderNumber: order_number,
           apiKey: TradeIt.api_key
         }
-
-        body[:orderNumber] = self.order_number if self.order_number
-
 
         result = HTTParty.post(uri.to_s, body: body, format: :json)
         if result['status'] == 'SUCCESS'

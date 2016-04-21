@@ -23,6 +23,20 @@ module TradeIt
       yield self
     end
 
+    # Tradeit order statuses
+    def order_statuses
+      {
+        'PENDING' => :pending,
+        'OPEN' => :open,
+        'FILLED' => :filled,
+        'PART_FILLED' => :part_filled,
+        'CANCELED' => :cancelled,
+        'REJECTED' => :rejected,
+        'NOT_FOUND' => :not_found,
+        'PENDING_CANCEL' => :pending_cancel,
+        'EXPIRED' => :expired
+      }
+    end
 
     # Tradeit brokers as symbols
     def brokers
