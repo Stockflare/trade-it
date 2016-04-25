@@ -147,8 +147,15 @@ Successful response without security question:
   status: 200,
   payload:   { type: 'success',
                token: 'ce15f0eb7a9a473eb40687cdf3150479',
-               accounts:     [{ 'account_number' => 'brkAcct1',
-                                'name' => 'Individual Account (XX878977484)' }] },
+               accounts:     [{"account_number"=>"brkAcct1",
+                "name"=>"Individual Account (XX878977484)",
+                "cash"=>nil,
+                "power"=>nil,
+                "day_return"=>nil,
+                "day_return_percent"=>nil,
+                "total_return"=>nil,
+                "total_return_percent"=>nil,
+                "value"=>nil}] },
   messages: ['Credential Successfully Validated'] }
 ```
 
@@ -223,6 +230,56 @@ TradeIt::User::Verify.new(
 All success responses are identical to `TradeIt::User::Login`
 
 If the user provides a bad answer then the response will be a success asking another question.
+
+A failure will raise a `TradeIt::Errors::LoginException` with the similar attributes:
+```
+{ type: :error,
+  code: 500,
+  description: 'Could Not Complete Your Request',
+  messages: ['Your session has expired. Please try again'] }
+```
+
+### TradeIt::User::Account
+
+Get the current financial state of an account
+
+Example Call
+
+```
+TradeIt::User::Account.new(
+  token: <token from TradeIt::User::Login>,
+  account_number: account_number
+).call.response
+```
+
+Example response
+
+```
+{:raw=>
+  {"availableCash"=>1204.06,
+   "buyingPower"=>2408.12,
+   "dayAbsoluteReturn"=>78.42,
+   "dayPercentReturn"=>3.25,
+   "longMessages"=>nil,
+   "shortMessage"=>"Account Overview successfully fetched",
+   "status"=>"SUCCESS",
+   "token"=>"3e40016b846f4d20a4b7102a1949f893",
+   "totalAbsoluteReturn"=>14486.67,
+   "totalPercentReturn"=>22.84,
+   "totalValue"=>76489.23},
+ :status=>200,
+ :payload=>
+  {"type"=>"success",
+   "cash"=>1204.06,
+   "power"=>2408.12,
+   "day_return"=>78.42,
+   "day_return_percent"=>3.25,
+   "total_return"=>14486.67,
+   "total_return_percent"=>22.84,
+   "token"=>"3e40016b846f4d20a4b7102a1949f893"},
+ :messages=>["Account Overview successfully fetched"]}
+```
+
 
 A failure will raise a `TradeIt::Errors::LoginException` with the similar attributes:
 ```

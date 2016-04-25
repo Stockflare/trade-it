@@ -9,6 +9,7 @@ module TradeIt
     autoload :Verify, 'trade_it/user/verify'
     autoload :Logout, 'trade_it/user/logout'
     autoload :Refresh, 'trade_it/user/refresh'
+    autoload :Account, 'trade_it/user/account'
 
     class << self
       #

@@ -40,6 +40,13 @@ module TradeIt
       values do
         attribute :account_number, String
         attribute :name, String
+        attribute :cash, Float
+        attribute :power, Float
+        attribute :day_return, Float
+        attribute :day_return_percent, Float
+        attribute :total_return, Float
+        attribute :total_return_percent, Float
+        attribute :value, Float
       end
     end
 
