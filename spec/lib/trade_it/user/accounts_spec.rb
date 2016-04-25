@@ -31,6 +31,7 @@ describe TradeIt::User::Account do
       expect(subject.payload.day_return_percent).to be > 0
       expect(subject.payload.total_return).to be > 0
       expect(subject.payload.total_return_percent).to be > 0
+      expect(subject.payload.value).to be > 0
     end
     describe 'bad token' do
       let(:token) { 'foooooobaaarrrr' }

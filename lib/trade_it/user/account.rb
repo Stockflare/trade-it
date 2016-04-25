@@ -27,6 +27,7 @@ module TradeIt
             day_return_percent: result['dayPercentReturn'].to_f,
             total_return: result['totalAbsoluteReturn'].to_f,
             total_return_percent: result['totalPercentReturn'].to_f,
+            value: result['totalValue'].to_f,
             token: result['token']
           }
 

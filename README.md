@@ -276,6 +276,7 @@ Example response
    "day_return_percent"=>3.25,
    "total_return"=>14486.67,
    "total_return_percent"=>22.84,
+   "value"=>22.84,
    "token"=>"3e40016b846f4d20a4b7102a1949f893"},
  :messages=>["Account Overview successfully fetched"]}
 ```
