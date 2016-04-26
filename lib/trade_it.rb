@@ -50,6 +50,7 @@ module TradeIt
         robinhood: 'Robinhood',
         options_house: 'OptionsHouse',
         tradier: 'Tradier',
+        trade_king: 'TradeKing',
         dummy: 'Dummy'
       }
     end
