@@ -45,7 +45,7 @@ module TradeIt
             last_price: details['lastPrice'].to_f,
             bid_price: details['bidPrice'].to_f,
             ask_price: details['askPrice'].to_f,
-            timestamp: self.parse_time(details['timestamp']),
+            timestamp: parse_time(details['timestamp']),
             buying_power: details['buyingPower'].to_f,
             estimated_commission: details['estimatedOrderCommission'].to_f,
             estimated_value: details['estimatedOrderValue'].to_f,
@@ -65,7 +65,7 @@ module TradeIt
           #
           # Order failed
           #
-          fail TradeIt::Errors::OrderException.new(
+          raise TradeIt::Errors::OrderException.new(
             type: :error,
             code: result['code'],
             description: result['shortMessage'],
@@ -77,11 +77,9 @@ module TradeIt
       end
 
       def parse_time(time_string)
-        begin
-          Time.parse(time_string).utc.to_i
-        rescue
-          Time.now.utc.to_i
-        end
+        Time.parse(time_string).utc.to_i
+      rescue
+        Time.now.utc.to_i
       end
     end
   end

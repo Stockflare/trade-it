@@ -36,7 +36,7 @@ module TradeIt
           #
           # Status failed
           #
-          fail TradeIt::Errors::OrderException.new(
+          raise TradeIt::Errors::OrderException.new(
             type: :error,
             code: result['code'],
             description: result['shortMessage'],
@@ -48,11 +48,9 @@ module TradeIt
       end
 
       def parse_time(time_string)
-        begin
-          Time.parse(time_string).utc.to_i
-        rescue
-          Time.now.utc.to_i
-        end
+        Time.parse(time_string).utc.to_i
+      rescue
+        Time.now.utc.to_i
       end
     end
   end

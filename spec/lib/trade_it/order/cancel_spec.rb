@@ -15,7 +15,6 @@ describe TradeIt::Order::Cancel do
   let(:token) { user.token }
   let(:account_number) { user.accounts[0].account_number }
 
-
   describe 'Cancel Order' do
     let(:orders) do
       TradeIt::Order::Status.new(
@@ -41,10 +40,8 @@ describe TradeIt::Order::Cancel do
       expect(subject.payload.orders[0].order_action).to eql :buy
       expect(subject.payload.orders[0].filled_quantity).to eql 0
       expect(subject.payload.orders[0].filled_price).to eql 0.0
-      expect(subject.payload.orders[0].quantity).to eql 275000
+      expect(subject.payload.orders[0].quantity).to eql 275_000
       expect(subject.payload.orders[0].expiration).to eql :gtc
     end
-
   end
-
 end

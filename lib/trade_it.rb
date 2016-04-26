@@ -15,7 +15,6 @@ module TradeIt
   class << self
     attr_writer :logger, :api_uri, :api_key
 
-
     # Helper to configure .
     #
     # @yield [Odin] Yields the {Tradeit} module.
@@ -135,7 +134,7 @@ module TradeIt
       if @api_uri
         return @api_uri
       else
-        fail TradeIt::Errors::ConfigException.new(
+        raise TradeIt::Errors::ConfigException.new(
           type: :error,
           code: 500,
           description: 'api_uri missing',
@@ -148,7 +147,7 @@ module TradeIt
       if @api_key
         return @api_key
       else
-        fail TradeIt::Errors::ConfigException.new(
+        raise TradeIt::Errors::ConfigException.new(
           type: :error,
           code: 500,
           description: 'api_key missing',

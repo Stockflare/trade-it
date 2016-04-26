@@ -40,5 +40,4 @@ describe TradeIt::User::Account do
       end
     end
   end
-
 end

@@ -9,15 +9,12 @@ module TradeIt
     autoload :Cancel, 'trade_it/order/cancel'
 
     class << self
-
       def parse_order_details(details)
         orders = []
         details.each do |detail|
-
           detail['orderLegs'].each do |leg|
-
-            filled_value = leg['fills'].inject(0){|sum, f| sum + (f['quantity'].to_i * f['price'].to_f) }
-            filled_quantity = leg['fills'].inject(0){|sum, f| sum + f['quantity'].to_i }
+            filled_value = leg['fills'].inject(0) { |sum, f| sum + (f['quantity'].to_i * f['price'].to_f) }
+            filled_quantity = leg['fills'].inject(0) { |sum, f| sum + f['quantity'].to_i }
             filled_price = filled_quantity != 0 ? filled_value / filled_quantity : 0.0
             order = {
               ticker: leg['symbol'].downcase,
@@ -27,7 +24,7 @@ module TradeIt
               order_number: detail['orderNumber'],
               quantity: leg['orderedQuantity'].to_i,
               expiration: TradeIt.order_status_expirations[detail['orderExpiration']],
-              status: TradeIt.order_statuses[detail['orderStatus']],
+              status: TradeIt.order_statuses[detail['orderStatus']]
             }
             orders.push order
           end

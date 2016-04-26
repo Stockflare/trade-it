@@ -27,7 +27,7 @@ module TradeIt
                                                       },
                                                       messages: [result['shortMessage']].compact)
         else
-          fail TradeIt::Errors::LoginException.new(
+          raise TradeIt::Errors::LoginException.new(
             type: :error,
             code: result['code'],
             description: result['shortMessage'],

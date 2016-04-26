@@ -9,7 +9,7 @@ module TradeIt
 
       def call
         uri =  URI.join(TradeIt.api_uri, 'v1/order/getAllOrderStatus').to_s
-        uri =  URI.join(TradeIt.api_uri, 'v1/order/getSingleOrderStatus').to_s if self.order_number
+        uri =  URI.join(TradeIt.api_uri, 'v1/order/getSingleOrderStatus').to_s if order_number
 
         body = {
           token: token,
@@ -17,8 +17,7 @@ module TradeIt
           apiKey: TradeIt.api_key
         }
 
-        body[:orderNumber] = self.order_number if self.order_number
-
+        body[:orderNumber] = order_number if order_number
 
         result = HTTParty.post(uri.to_s, body: body, format: :json)
         if result['status'] == 'SUCCESS'
@@ -39,7 +38,7 @@ module TradeIt
           #
           # Status failed
           #
-          fail TradeIt::Errors::OrderException.new(
+          raise TradeIt::Errors::OrderException.new(
             type: :error,
             code: result['code'],
             description: result['shortMessage'],
@@ -51,11 +50,9 @@ module TradeIt
       end
 
       def parse_time(time_string)
-        begin
-          Time.parse(time_string).utc.to_i
-        rescue
-          Time.now.utc.to_i
-        end
+        Time.parse(time_string).utc.to_i
+      rescue
+        Time.now.utc.to_i
       end
     end
   end

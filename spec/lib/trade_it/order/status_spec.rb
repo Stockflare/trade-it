@@ -37,7 +37,7 @@ describe TradeIt::Order::Status do
       expect(subject.payload.orders[1].order_action).to eql :sell_short
       expect(subject.payload.orders[1].filled_quantity).to eql 6000
       expect(subject.payload.orders[1].filled_price).to eql 123.45
-      expect(subject.payload.orders[1].quantity).to eql 10000
+      expect(subject.payload.orders[1].quantity).to eql 10_000
       expect(subject.payload.orders[1].expiration).to eql :gtc
       expect(subject.payload.orders[1].status).to eql :part_filled
     end
@@ -84,5 +84,4 @@ describe TradeIt::Order::Status do
       end
     end
   end
-
 end

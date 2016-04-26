@@ -15,7 +15,6 @@ module TradeIt
           apiKey: TradeIt.api_key
         }
 
-
         result = HTTParty.post(uri.to_s, body: body, format: :json)
         if result['status'] == 'SUCCESS'
 
@@ -41,7 +40,7 @@ module TradeIt
           #
           # Status failed
           #
-          fail TradeIt::Errors::LoginException.new(
+          raise TradeIt::Errors::LoginException.new(
             type: :error,
             code: result['code'],
             description: result['shortMessage'],
@@ -53,11 +52,9 @@ module TradeIt
       end
 
       def parse_time(time_string)
-        begin
-          Time.parse(time_string).utc.to_i
-        rescue
-          Time.now.utc.to_i
-        end
+        Time.parse(time_string).utc.to_i
+      rescue
+        Time.now.utc.to_i
       end
     end
   end
