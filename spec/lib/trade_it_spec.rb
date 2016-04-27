@@ -17,7 +17,7 @@ describe TradeIt do
       TradeIt.configure do |config|
         config.api_uri = nil
       end
-      expect { TradeIt.api_uri }.to raise_error(TradeIt::Errors::ConfigException)
+      expect { TradeIt.api_uri }.to raise_error(Trading::Errors::ConfigException)
     end
   end
   describe '#api_key' do
@@ -28,7 +28,7 @@ describe TradeIt do
       TradeIt.configure do |config|
         config.api_key = nil
       end
-      expect { TradeIt.api_uri }.to raise_error(TradeIt::Errors::ConfigException)
+      expect { TradeIt.api_uri }.to raise_error(Trading::Errors::ConfigException)
     end
   end
 end

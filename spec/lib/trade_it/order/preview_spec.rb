@@ -138,7 +138,7 @@ describe TradeIt::Order::Preview do
     # Quantity above 100 will trigger errors with the test user
     let(:quantity) { 150 }
     it 'throws error' do
-      expect { subject }.to raise_error(TradeIt::Errors::OrderException)
+      expect { subject }.to raise_error(Trading::Errors::OrderException)
     end
   end
 
@@ -157,13 +157,13 @@ describe TradeIt::Order::Preview do
   describe 'bad token' do
     let(:token) { 'foooooobaaarrrr' }
     it 'throws error' do
-      expect { subject }.to raise_error(TradeIt::Errors::OrderException)
+      expect { subject }.to raise_error(Trading::Errors::OrderException)
     end
   end
   describe 'bad account' do
     let(:account_number) { 'foooooobaaarrrr' }
     it 'throws error' do
-      expect { subject }.to raise_error(TradeIt::Errors::OrderException)
+      expect { subject }.to raise_error(Trading::Errors::OrderException)
     end
   end
 end

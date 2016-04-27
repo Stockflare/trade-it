@@ -4,11 +4,11 @@ require 'multi_json'
 require 'yajl/json_gem'
 require 'virtus'
 require 'httparty'
+require 'trading'
 
 module TradeIt
   autoload :Base, 'trade_it/base'
   autoload :User, 'trade_it/user'
-  autoload :Errors, 'trade_it/errors'
   autoload :Positions, 'trade_it/positions'
   autoload :Order, 'trade_it/order'
 
@@ -134,7 +134,7 @@ module TradeIt
       if @api_uri
         return @api_uri
       else
-        raise TradeIt::Errors::ConfigException.new(
+        raise Trading::Errors::ConfigException.new(
           type: :error,
           code: 500,
           description: 'api_uri missing',
@@ -147,7 +147,7 @@ module TradeIt
       if @api_key
         return @api_key
       else
-        raise TradeIt::Errors::ConfigException.new(
+        raise Trading::Errors::ConfigException.new(
           type: :error,
           code: 500,
           description: 'api_key missing',

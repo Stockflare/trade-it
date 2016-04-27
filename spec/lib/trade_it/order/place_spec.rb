@@ -137,7 +137,7 @@ describe TradeIt::Order::Place do
     describe 'failed place' do
       let(:preview_token) { 'foooooobaaarrrr' }
       it 'throws error' do
-        expect { subject }.to raise_error(TradeIt::Errors::OrderException)
+        expect { subject }.to raise_error(Trading::Errors::OrderException)
       end
     end
   end

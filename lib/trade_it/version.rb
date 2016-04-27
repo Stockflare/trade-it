@@ -1,3 +1,3 @@
 module TradeIt
-  VERSION = '0.1.9'.freeze
+  VERSION = '1.0.1'.freeze
 end

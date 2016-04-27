@@ -37,7 +37,7 @@ describe TradeIt::Positions::Get do
   describe 'bad account' do
     let(:account_number) { 'foooooobaaarrrr' }
     it 'throws error' do
-      expect { subject }.to raise_error(TradeIt::Errors::PositionException)
+      expect { subject }.to raise_error(Trading::Errors::PositionException)
     end
   end
 end
