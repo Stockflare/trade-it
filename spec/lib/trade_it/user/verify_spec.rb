@@ -32,7 +32,7 @@ describe TradeIt::User::Verify do
   describe 'bad token' do
     let(:token) { 'foooooobaaarrrr' }
     it 'throws error' do
-      expect { subject }.to raise_error(TradeIt::Errors::LoginException)
+      expect { subject }.to raise_error(Trading::Errors::LoginException)
     end
   end
 

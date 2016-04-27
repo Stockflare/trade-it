@@ -37,7 +37,7 @@ module TradeIt
           #
           # Login failed
           #
-          raise TradeIt::Errors::PositionException.new(
+          raise Trading::Errors::PositionException.new(
             type: :error,
             code: result['code'],
             description: result['shortMessage'],

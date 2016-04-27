@@ -32,7 +32,7 @@ describe TradeIt::User::Login do
   describe 'bad credentials' do
     let(:user_id) { 'foooooobaaarrrr' }
     it 'throws error' do
-      expect { subject }.to raise_error(TradeIt::Errors::LoginException)
+      expect { subject }.to raise_error(Trading::Errors::LoginException)
     end
   end
 

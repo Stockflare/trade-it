@@ -18,7 +18,7 @@ It is expected that most Stockflare use cases will only use the `response.payloa
 
 Additionally a `response.raw` is provided that contains the raw TradeIt response.  This is provided for development and debug purposes only.  Upstream users should only rely on the `response.payload` and `response.messages`.  This will allow us to deal with minor breaking changes in the TradeIt API (which is currently in QA) without having to make code changes in upstream users.
 
-All Error cases are handled by raising a subclass of `TradeIt::Errors::TradeItException`, this object exposes a number of attributes that can you can `to_h` to the consumer.
+All Error cases are handled by raising a subclass of `Trading::Errors::TradingException`, this object exposes a number of attributes that can you can `to_h` to the consumer.
 
 ### Configuration Values
 
@@ -113,7 +113,7 @@ Successful response:
   messages: ['User succesfully linked'] }
 ```
 
-Link failure will raise a `TradeIt::Errors::LoginException` with the following attributes:
+Link failure will raise a `Trading::Errors::LoginException` with the following attributes:
 
 ```
 { type: :error,
@@ -207,7 +207,7 @@ The `encoded` image is Base64 encoded
   messages: [] }
 ```
 
-Login failure will raise a `TradeIt::Errors::LoginException` with the following attributes:
+Login failure will raise a `Trading::Errors::LoginException` with the following attributes:
 
 ```
 { type: :error,
@@ -231,7 +231,7 @@ All success responses are identical to `TradeIt::User::Login`
 
 If the user provides a bad answer then the response will be a success asking another question.
 
-A failure will raise a `TradeIt::Errors::LoginException` with the similar attributes:
+A failure will raise a `Trading::Errors::LoginException` with the similar attributes:
 ```
 { type: :error,
   code: 500,
@@ -282,7 +282,7 @@ Example response
 ```
 
 
-A failure will raise a `TradeIt::Errors::LoginException` with the similar attributes:
+A failure will raise a `Trading::Errors::LoginException` with the similar attributes:
 ```
 { type: :error,
   code: 500,
@@ -308,7 +308,7 @@ Successful logout response
   messages: [] }
 ```
 
-Failed Logout will raise a `TradeIt::Errors::LoginException` with similar attributes:
+Failed Logout will raise a `Trading::Errors::LoginException` with similar attributes:
 
 ```
 { type: :error,
@@ -343,7 +343,7 @@ Successful Response:
   messages: [] }
 ```
 
-Failed Logout will raise a `TradeIt::Errors::LoginException` with similar attributes:
+Failed Logout will raise a `Trading::Errors::LoginException` with similar attributes:
 
 ```
 { type: :error,
@@ -396,7 +396,7 @@ Successful response:
   messages: ['Position successfully fetched'] }
 ```
 
-Failed Call will raise a `TradeIt::Errors::PositionException` with similar attributes:
+Failed Call will raise a `Trading::Errors::PositionException` with similar attributes:
 
 ```
 { type: :error,
@@ -536,7 +536,7 @@ Example response
   messages: ['Order Successfully Submitted'] }
 ```
 
-Failed Call will raise a `TradeIt::Errors::OrderException` with similar attributes:
+Failed Call will raise a `Trading::Errors::OrderException` with similar attributes:
 
 ```
 {:type=>:error,

@@ -44,7 +44,7 @@ describe TradeIt::Order::Status do
     describe 'bad token' do
       let(:token) { 'foooooobaaarrrr' }
       it 'throws error' do
-        expect { subject }.to raise_error(TradeIt::Errors::OrderException)
+        expect { subject }.to raise_error(Trading::Errors::OrderException)
       end
     end
   end
@@ -80,7 +80,7 @@ describe TradeIt::Order::Status do
     describe 'bad account' do
       let(:account_number) { 'foooooobaaarrrr' }
       it 'throws error' do
-        expect { subject }.to raise_error(TradeIt::Errors::OrderException)
+        expect { subject }.to raise_error(Trading::Errors::OrderException)
       end
     end
   end
