@@ -38,7 +38,7 @@ describe TradeIt::Order::Cancel do
       expect(subject.payload.token).not_to be_empty
       expect(subject.payload.orders[0].ticker).to eql 'ftfy'
       expect(subject.payload.orders[0].order_action).to eql :buy
-      expect(subject.payload.orders[0].filled_quantity).to eql 0
+      expect(subject.payload.orders[0].filled_quantity).to eql 0.0
       expect(subject.payload.orders[0].filled_price).to eql 0.0
       expect(subject.payload.orders[0].quantity).to eql 275_000
       expect(subject.payload.orders[0].expiration).to eql :gtc

@@ -28,7 +28,7 @@ module TradeIt
         'PENDING' => :pending,
         'OPEN' => :open,
         'FILLED' => :filled,
-        'PART_FILLED' => :part_filled,
+        'PART_FILLED' => :filling,
         'CANCELED' => :cancelled,
         'REJECTED' => :rejected,
         'NOT_FOUND' => :not_found,

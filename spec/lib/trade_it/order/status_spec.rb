@@ -41,7 +41,7 @@ describe TradeIt::Order::Status do
       expect(subject.payload.orders[1].filled_total).to eql 740700.0
       expect(subject.payload.orders[1].quantity).to eql 10_000
       expect(subject.payload.orders[1].expiration).to eql :gtc
-      expect(subject.payload.orders[1].status).to eql :part_filled
+      expect(subject.payload.orders[1].status).to eql :filling
     end
     describe 'bad token' do
       let(:token) { 'foooooobaaarrrr' }
