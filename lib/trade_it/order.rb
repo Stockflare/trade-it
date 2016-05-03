@@ -19,8 +19,9 @@ module TradeIt
             order = {
               ticker: leg['symbol'].downcase,
               order_action: TradeIt.order_status_actions[leg['action']],
-              filled_quantity: filled_quantity,
+              filled_quantity: filled_quantity.to_f,
               filled_price: filled_price,
+              filled_total: filled_value.to_f,
               order_number: detail['orderNumber'],
               quantity: leg['orderedQuantity'].to_i,
               expiration: TradeIt.order_status_expirations[detail['orderExpiration']],

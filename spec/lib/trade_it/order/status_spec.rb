@@ -28,15 +28,17 @@ describe TradeIt::Order::Status do
       expect(subject.payload.token).not_to be_empty
       expect(subject.payload.orders[0].ticker).to eql 'cmg'
       expect(subject.payload.orders[0].order_action).to eql :buy
-      expect(subject.payload.orders[0].filled_quantity).to eql 0
+      expect(subject.payload.orders[0].filled_quantity).to eql 0.0
       expect(subject.payload.orders[0].filled_price).to eql 0.0
+      expect(subject.payload.orders[0].filled_total).to eql 0.0
       expect(subject.payload.orders[0].quantity).to eql 5000
       expect(subject.payload.orders[0].expiration).to eql :day
       expect(subject.payload.orders[0].status).to eql :open
       expect(subject.payload.orders[1].ticker).to eql 'mcd'
       expect(subject.payload.orders[1].order_action).to eql :sell_short
-      expect(subject.payload.orders[1].filled_quantity).to eql 6000
+      expect(subject.payload.orders[1].filled_quantity).to eql 6000.0
       expect(subject.payload.orders[1].filled_price).to eql 123.45
+      expect(subject.payload.orders[1].filled_total).to eql 740700.0
       expect(subject.payload.orders[1].quantity).to eql 10_000
       expect(subject.payload.orders[1].expiration).to eql :gtc
       expect(subject.payload.orders[1].status).to eql :part_filled
@@ -72,8 +74,9 @@ describe TradeIt::Order::Status do
       expect(subject.payload.token).not_to be_empty
       expect(subject.payload.orders[0].ticker).to eql 'cmg'
       expect(subject.payload.orders[0].order_action).to eql :buy
-      expect(subject.payload.orders[0].filled_quantity).to eql 0
+      expect(subject.payload.orders[0].filled_quantity).to eql 0.0
       expect(subject.payload.orders[0].filled_price).to eql 0.0
+      expect(subject.payload.orders[0].filled_total).to eql 0.0
       expect(subject.payload.orders[0].quantity).to eql 5000
       expect(subject.payload.orders[0].expiration).to eql :day
     end
