@@ -66,8 +66,8 @@ module TradeIt
 
     def preview_order_actions
       {
-        buy: 'Buy',
-        sell: 'Sell',
+        buy: 'buy',
+        sell: 'sell',
         buy_to_cover: 'Buy to Cover',
         sell_short: 'Sell Short'
       }
@@ -89,10 +89,10 @@ module TradeIt
 
     def place_order_actions
       {
-        buy: 'Buy',
-        sell: 'Sell',
-        buy_to_cover: 'BuyToCover',
-        sell_short: 'SellShort'
+        buy: 'buy',
+        sell: 'sell',
+        buy_to_cover: 'buyToCover',
+        sell_short: 'sellShort'
       }
     end
 
@@ -125,8 +125,8 @@ module TradeIt
 
     def preview_order_expirations
       {
-        day: 'Day',
-        gtc: 'Good Till Cancelled'
+        day: 'day',
+        gtc: 'gtc'
       }
     end
 

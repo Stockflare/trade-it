@@ -33,6 +33,7 @@ module TradeIt
         result = HTTParty.post(uri.to_s, body: body, format: :json)
         if result['status'] == 'REVIEW_ORDER'
           details = result['orderDetails']
+          # binding.pry
           payload = {
             type: 'review',
             ticker: details['orderSymbol'],

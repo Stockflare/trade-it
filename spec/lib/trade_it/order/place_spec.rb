@@ -59,7 +59,7 @@ describe TradeIt::Order::Place do
       expect(subject.payload.order_action).to eql :buy
       expect(subject.payload.quantity).to eql 10
       expect(subject.payload.expiration).to eql :day
-      expect(subject.payload.price_label).to eql 'Market'
+      expect(subject.payload.price_label).to eql 'market'
       expect(subject.payload.message).to eql subject.raw['confirmationMessage']
       expect(subject.payload.last_price).to eql subject.raw['orderInfo']['price']['last'].to_f
       expect(subject.payload.bid_price).to eql subject.raw['orderInfo']['price']['bid'].to_f
@@ -101,7 +101,7 @@ describe TradeIt::Order::Place do
       it 'returns details' do
         expect(subject.status).to eql 200
         expect(subject.payload.type).to eql 'success'
-        expect(subject.payload.price_label).to eql 'Limit'
+        expect(subject.payload.price_label).to eql 'limit'
       end
     end
 
@@ -115,7 +115,7 @@ describe TradeIt::Order::Place do
       it 'returns details' do
         expect(subject.status).to eql 200
         expect(subject.payload.type).to eql 'success'
-        expect(subject.payload.price_label).to eql 'Stop on Quote'
+        expect(subject.payload.price_label).to eql 'stopMarket'
       end
     end
 
@@ -130,7 +130,7 @@ describe TradeIt::Order::Place do
       it 'returns details' do
         expect(subject.status).to eql 200
         expect(subject.payload.type).to eql 'success'
-        expect(subject.payload.price_label).to eql 'Stop Limit on Quote'
+        expect(subject.payload.price_label).to eql 'stopLimit'
       end
     end
 
