@@ -710,3 +710,40 @@ Example response
    "token"=>"d9c45bb6223f425c865ed7c88042ad1f"},
  :messages=>["Order statuses successfully fetched"]}
 ```
+
+
+### TradeIt::Instrument::Details
+
+TradeIt does not in fact suppoert this call and the result is synthesised by calling the Stockflare api-price.  This call exists to allow for a identical trading flow across all broker integrations.
+
+Example Call
+
+```
+TradeIt::Order::Cancel.new(
+  token: preview_token,
+  ticker: "aapl"
+).call.response
+```
+
+Example response
+
+```
+{:raw=>{"aapl"=>{"la"=>97.21, "t"=>"2016-06-14T14:26:02-05:00", "c"=>-0.13, "b"=>97.22, "a"=>97.23, "h"=>98.47, "l"=>96.75, "v"=>2414084}},
+ :status=>200,
+ :payload=>
+  {"type"=>"success",
+   "broker_id"=>nil,
+   "ticker"=>"aapl",
+   "last_price"=>97.21,
+   "bid_price"=>97.22,
+   "ask_price"=>97.23,
+   "order_size_max"=>10000.0,
+   "order_size_min"=>1.0,
+   "order_size_step"=>1.0,
+   "allow_fractional_shares"=>false,
+   "timestamp"=>1465929667,
+   "warnings"=>[],
+   "must_acknowledge"=>[],
+   "token"=>"873ab208e937460fa8b84ebe68c364d8"},
+ :messages=>[]}
+```

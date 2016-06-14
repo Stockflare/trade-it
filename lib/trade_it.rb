@@ -11,9 +11,10 @@ module TradeIt
   autoload :User, 'trade_it/user'
   autoload :Positions, 'trade_it/positions'
   autoload :Order, 'trade_it/order'
+  autoload :Instrument, 'trade_it/instrument'
 
   class << self
-    attr_writer :logger, :api_uri, :api_key
+    attr_writer :logger, :api_uri, :api_key, :price_service_url
 
     # Helper to configure .
     #
@@ -152,6 +153,19 @@ module TradeIt
           code: 500,
           description: 'api_key missing',
           messages: ['api_key configuration variable has not been set']
+        )
+      end
+    end
+
+    def price_service_url
+      if @price_service_url
+        return @price_service_url
+      else
+        raise Trading::Errors::ConfigException.new(
+          type: :error,
+          code: 500,
+          description: 'price_service_url missing',
+          messages: ['price_service_url configuration variable has not been set']
         )
       end
     end

@@ -31,4 +31,16 @@ describe TradeIt do
       expect { TradeIt.api_uri }.to raise_error(Trading::Errors::ConfigException)
     end
   end
+  describe '#price_service_url' do
+    it 'returns ENV - PRICE_SERVICE_URL' do
+      expect(TradeIt.price_service_url).to eql ENV['PRICE_SERVICE_URL']
+    end
+    it 'raises error with no key' do
+      TradeIt.configure do |config|
+        config.price_service_url = nil
+      end
+      expect { TradeIt.price_service_url }.to raise_error(Trading::Errors::ConfigException)
+    end
+  end
+
 end
