@@ -58,6 +58,7 @@ describe TradeIt::Order::Preview do
       expect(subject.payload.estimated_value).to eql subject.raw['orderDetails']['estimatedOrderValue'].to_f
       expect(subject.payload.estimated_total).to eql subject.raw['orderDetails']['estimatedTotalValue'].to_f
       expect(subject.payload.buying_power).to eql subject.raw['orderDetails']['buyingPower'].to_f
+      expect(subject.payload.amount).to eql nil
     end
   end
 
@@ -121,6 +122,17 @@ describe TradeIt::Order::Preview do
         expect(subject.status).to eql 200
         expect(subject.payload.type).to eql 'review'
         expect(subject.payload.price_label).to eql '$11.00 (trigger: $10.00)'
+      end
+    end
+
+    describe 'amount in order' do
+      let(:order_extras) do
+        {
+          amount: 10.0
+        }
+      end
+      it 'throws error' do
+        expect { subject }.to raise_error(Trading::Errors::OrderException)
       end
     end
   end

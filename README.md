@@ -467,6 +467,7 @@ Successful response:
                'estimated_total' => 28.5,
                'warnings' => [],
                'must_acknowledge' => [],
+               'amount' => nil,
                'token' => '140784ef96214a5186041abebdfe038a' },
   messages: [] }
 

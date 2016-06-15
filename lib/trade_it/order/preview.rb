@@ -11,9 +11,20 @@ module TradeIt
         attribute :expiration, Symbol
         attribute :limit_price, Float
         attribute :stop_price, Float
+        attribute :amount, Float
       end
 
       def call
+        # Tradeit does not support order amounts
+        if amount && amount != 0.0
+          raise Trading::Errors::OrderException.new(
+            type: :error,
+            code: 500,
+            description: 'Amount is not supported',
+            messages: 'Amount is not supported'
+          )
+        end
+
         uri =  URI.join(TradeIt.api_uri, 'v1/order/previewStockOrEtfOrder').to_s
 
         body = {
@@ -53,6 +64,7 @@ module TradeIt
             estimated_total: details['estimatedTotalValue'].to_f,
             warnings: result['warningsList'].compact,
             must_acknowledge: result['ackWarningsList'].compact,
+            amount: amount,
             token: result['token']
           }
 
