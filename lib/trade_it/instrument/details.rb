@@ -15,16 +15,14 @@ module TradeIt
             type: 'success',
             broker_id: nil,
             ticker: ticker.downcase,
-            last_price: result[ticker]['la'].to_f,
-            bid_price: result[ticker]['b'].to_f,
-            ask_price: result[ticker]['a'].to_f,
-            order_size_max: 10000.0,
-            order_size_min: 1.0,
-            order_size_step: 1.0,
-            allow_fractional_shares: false,
+            last: result[ticker]['la'].to_f,
+            bid: result[ticker]['b'].to_f,
+            ask: result[ticker]['a'].to_f,
+            max: 10000.0,
+            min: 1.0,
+            step: 1.0,
+            fractional: false,
             timestamp: Time.now.utc.to_i,
-            warnings: [],
-            must_acknowledge: [],
             token: token
           }
 

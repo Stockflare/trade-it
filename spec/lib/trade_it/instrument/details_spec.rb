@@ -26,17 +26,17 @@ describe TradeIt::Instrument::Details do
   describe 'Details' do
     it 'returns positions' do
       expect(subject.status).to eql 200
+      binding.pry
       expect(subject.payload.type).to eql 'success'
       expect(subject.payload.broker_id).to eql nil
-      expect(subject.payload.last_price).to be > 0.0
-      expect(subject.payload.last_price).to be > 0.0
-      expect(subject.payload.bid_price).to be > 0.0
-      expect(subject.payload.ask_price).to be > 0.0
-      expect(subject.payload.order_size_max).to be > 0.0
-      expect(subject.payload.order_size_min).to be > 0.0
-      expect(subject.payload.order_size_step).to be > 0.0
+      expect(subject.payload.last).to be > 0.0
+      expect(subject.payload.bid).to be > 0.0
+      expect(subject.payload.ask).to be > 0.0
+      expect(subject.payload.max).to be > 0.0
+      expect(subject.payload.min).to be > 0.0
+      expect(subject.payload.step).to be > 0.0
       expect(subject.payload.timestamp).to be > 0
-      expect(subject.payload.allow_fractional_shares).to eql false
+      expect(subject.payload.fractional).to eql false
       expect(subject.payload.token).not_to be_empty
     end
   end
