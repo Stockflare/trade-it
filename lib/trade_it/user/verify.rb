@@ -4,10 +4,15 @@ module TradeIt
       values do
         attribute :token, String
         attribute :answer, String
+        attribute :identity, String
       end
 
       def call
-        uri =  URI.join(TradeIt.api_uri, 'v1/user/answerSecurityQuestion').to_s
+        path = "v1/user/answerSecurityQuestion"
+        if identity
+          path = "v1/user/answerSecurityQuestion?srv=#{identity}"
+        end
+        uri =  URI.join(TradeIt.api_uri, path).to_s
 
         body = {
           securityAnswer: answer,

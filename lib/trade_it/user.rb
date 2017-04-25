@@ -10,6 +10,8 @@ module TradeIt
     autoload :Logout, 'trade_it/user/logout'
     autoload :Refresh, 'trade_it/user/refresh'
     autoload :Account, 'trade_it/user/account'
+    autoload :OauthLink, 'trade_it/user/oauth_link'
+    autoload :OauthUrl, 'trade_it/user/oauth_url'
 
     class << self
       #
