@@ -12,6 +12,7 @@ module TradeIt
     autoload :Account, 'trade_it/user/account'
     autoload :OauthLink, 'trade_it/user/oauth_link'
     autoload :OauthUrl, 'trade_it/user/oauth_url'
+    autoload :OauthUrlMobile, 'trade_it/user/oauth_url_mobile'
 
     class << self
       #
