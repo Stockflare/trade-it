@@ -25,6 +25,7 @@ module TradeIt
             day_return_percent: result['dayPercentReturn'].to_f / 100.0 ,
             total_return: result['totalAbsoluteReturn'].to_f,
             total_return_percent: result['totalPercentReturn'].to_f / 100.0,
+            base_currency_code: result['accountBaseCurrency'].downcase,
             value: result['totalValue'].to_f,
             token: result['token']
           }
@@ -47,6 +48,7 @@ module TradeIt
           )
         end
         TradeIt.logger.info response.to_h
+        # pp(self.response.to_h)
         self
       end
 
