@@ -9,8 +9,7 @@ module TradeIt
       def call
         uri =  URI.join(TradeIt.api_uri, 'v1/user/getOAuthAccessToken').to_s
         body = {
-          o_auth_verifier: o_auth_verifier,
-          broker: TradeIt.brokers[broker],
+          oAuthVerifier: o_auth_verifier,
           apiKey: TradeIt.api_key
         }
         result = HTTParty.post(uri.to_s, body: body, format: :json)
