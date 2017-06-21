@@ -51,6 +51,7 @@ module TradeIt
         options_house: 'OptionsHouse',
         tradier: 'Tradier',
         trade_king: 'TradeKing',
+        vanguard: 'Vanguard',
         ib: 'IB',
         dummy: 'Dummy'
       }
