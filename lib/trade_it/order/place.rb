@@ -20,7 +20,7 @@ module TradeIt
           # binding.pry
           payload = {
             type: 'success',
-            ticker: details['symbol'],
+            ticker: details['symbol'].downcase,
             order_action: TradeIt.place_order_actions.key(details['action']),
             quantity: details['quantity'].to_i,
             expiration: TradeIt.order_expirations.key(details['universalOrderInfo']['expiration']),

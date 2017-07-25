@@ -18,7 +18,7 @@ module TradeIt
             TradeIt::Base::Position.new(
               quantity: p['quantity'],
               cost_basis: p['costbasis'],
-              ticker: p['symbol'],
+              ticker: p['symbol'].downcase,
               instrument_class: p['symbolClass'].downcase,
               change: p['totalGainLossDollar'],
               holding: p['holdingType'].downcase

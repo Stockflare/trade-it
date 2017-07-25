@@ -47,7 +47,7 @@ module TradeIt
           # binding.pry
           payload = {
             type: 'review',
-            ticker: details['orderSymbol'],
+            ticker: details['orderSymbol'].downcase,
             order_action: TradeIt.preview_order_actions.key(details['orderAction']),
             quantity: details['orderQuantity'].to_i,
             expiration: TradeIt.preview_order_expirations.key(details['orderExpiration']),
