@@ -5,7 +5,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'trade_it', github: 'stockflare/trade-it', tag: '0.1.0'
+gem 'trade_it', github: 'stockflare/trade-it', tag: '2.0.7'
 ```
 
 ## Usage
