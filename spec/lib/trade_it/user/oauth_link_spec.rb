@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe TradeIt::User::OauthLink do
-  let(:o_auth_verifier) { 'd2b656c8-1408-4ac6-9e75-e6ab64ee9836' }
+  let(:o_auth_verifier) { '4252e1d1-1afd-4121-ab0e-d7792b9dfdb1' }
   let(:broker) { :dummy }
 
   subject do

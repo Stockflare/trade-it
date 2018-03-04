@@ -6,7 +6,7 @@ module TradeIt
       end
 
       def call
-        uri =  URI.join(TradeIt.api_uri, 'v1/user/getOAuthLoginPopupUrlForWebApp').to_s
+        uri =  URI.join(TradeIt.api_uri, 'v1/user/getOAuthLoginPopupUrlForWebApp?fidelityPilot=true').to_s
         body = {
           broker: TradeIt.brokers[broker],
           apiKey: TradeIt.api_key

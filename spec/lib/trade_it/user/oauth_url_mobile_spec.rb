@@ -20,7 +20,7 @@ describe TradeIt::User::OauthUrlMobile do
   end
 
   describe 'bad credentials' do
-    let(:username) { 'foooooobaaarrrr' }
+    let(:broker) { 'foooooobaaarrrr' }
     it 'throws error' do
       expect { subject }.to raise_error(Trading::Errors::LoginException)
     end
